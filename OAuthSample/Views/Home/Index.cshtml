@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Visual Studio Online OAuth Client Sample";
+}
+
+<div class="jumbotron">
+    <h1>Visual Studio Online OAuth Client Sample</h1>
+    <p class="lead">This app shows how to authorize a user to authorize an app and then to request an access token to access Visual Studio Online on their behalf.</p>
+    <p><a href="/oauth/requesttoken" class="btn btn-primary btn-large">Start &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>Setup</h2>
+        <p>
+            Before you start, make sure to:
+            <ol>
+                <li><a href="https://app.vssps.visualstudio.com/app/register">Register</a> a client app with Visual Studio Online</li>
+                <li>Update the web.config of this web app and set the App ID, App Secret, and Callback URL set in the registered app. The callback URL should be https://<i>site</i>/oauth/callback
+                    <ul>
+                        <li>App ID: <strong>@ViewBag.AppId</strong></li>
+                        <li>Callback URL: <strong>@ViewBag.CallbackUrl</strong></li>
+                    </ul>
+                </li>
+            </ol>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Learn about auth in Visual Studio Online</h2>
+        <p>Visual Studio Online support authorization via OAuth 2.0. Learn more about how you can develop apps that securely access your user's Visual Studio Online projects and perform tasks on their behalf.</p>
+        <p><a class="btn btn-default" href="http://www.visualstudio.com/integrate/get-started/get-started-auth-oauth2-vsi">Learn more &raquo;</a></p>
+    </div>
+</div>

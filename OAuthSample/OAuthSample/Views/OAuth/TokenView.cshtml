@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Token Information";
+}
+
+<h2>Token Information</h2>
+
+<p><strong>Access Token: </strong>@ViewBag.Token.accessToken</p>
+<p><strong>Token Type: </strong>@ViewBag.Token.tokenType</p>
+<p><strong>Expires In: </strong>@ViewBag.Token.expiresIn</p>
+<p><strong>Refresh Token: </strong>@ViewBag.Token.refreshToken</p>
+<p>@ViewBag.Token.Error</p>
+

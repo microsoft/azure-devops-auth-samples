@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.21520.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthSample", "OAuthSample\OAuthSample.csproj", "{10FD671B-847F-4619-82FA-744D1A4CC566}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{4D26F01F-9D2A-45AC-B807-53E66EC65B72}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebAppPublishModule.psm1 = PublishScripts\AzureWebAppPublishModule.psm1
+		PublishScripts\Publish-WebApplication.ps1 = PublishScripts\Publish-WebApplication.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{F0D344B9-A8BE-4147-909F-3214E45204A1}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\OAuthSample-WAWS-dev.json = PublishScripts\Configurations\OAuthSample-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10FD671B-847F-4619-82FA-744D1A4CC566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10FD671B-847F-4619-82FA-744D1A4CC566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10FD671B-847F-4619-82FA-744D1A4CC566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10FD671B-847F-4619-82FA-744D1A4CC566}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F0D344B9-A8BE-4147-909F-3214E45204A1} = {4D26F01F-9D2A-45AC-B807-53E66EC65B72}
+	EndGlobalSection
+EndGlobal
