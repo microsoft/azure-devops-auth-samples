@@ -17,7 +17,7 @@ namespace OAuthSample.Controllers
         // GET: /OAuth/
         public ActionResult Index()
         {
-            
+
             return View();
 
         }
@@ -27,89 +27,118 @@ namespace OAuthSample.Controllers
             return new RedirectResult(GenerateAuthorizeUrl());
         }
 
-        public ActionResult Callback(string code, string state)
+        public ActionResult RefreshToken(string refreshToken)
         {
-            var error = String.Empty;
-            var strResponseData = String.Empty;
-            var strPostData = String.Empty;
+            TokenModel token = new TokenModel();
+            String error = null;
 
-            if(!String.IsNullOrEmpty(code))
+            if (!String.IsNullOrEmpty(refreshToken))
             {
-                strPostData = GeneratePostData(code);
-
-                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(
-                    ConfigurationManager.AppSettings["TokenUrl"]
-                    );
-
-                webRequest.Method = "POST";
-                webRequest.ContentLength = strPostData.Length;
-                webRequest.ContentType = "application/x-www-form-urlencoded";
-
-                using (StreamWriter swRequestWriter = new StreamWriter(webRequest.GetRequestStream()))
+                error = PerformTokenRequest(GenerateRefreshPostData(refreshToken), out token);
+                if (String.IsNullOrEmpty(error))
                 {
-                    swRequestWriter.Write(strPostData);
-                }
-
-                try
-                {
-                    HttpWebResponse hwrWebResponse = (HttpWebResponse)webRequest.GetResponse();
-
-                    if (hwrWebResponse.StatusCode == HttpStatusCode.OK)
-                    {
-                        using (StreamReader srResponseReader = new StreamReader(hwrWebResponse.GetResponseStream()))
-                        {
-                            strResponseData = srResponseReader.ReadToEnd();
-                        }
-
-                        TokenModel token = JsonConvert.DeserializeObject<TokenModel>(strResponseData);
-
-                        ViewBag.Token = token;
-
-                        return View("TokenView");
-                    }
-                }
-                catch (WebException wex)
-                {
-                    error = "<strong>Request Issue:</strong> " + wex.Message.ToString();
-                }
-                catch (Exception ex)
-                {
-                    error = "<strong>Issue:</strong> " + ex.Message.ToString();
+                    ViewBag.Token = token;
                 }
             }
-            else
-            {
-                error = "<strong>Issue:</strong> Empty authorization code";
-            }
 
-            TokenModel emptyToken = new TokenModel();
-            emptyToken.Error = error;
-
-            ViewBag.Token = emptyToken;
+            ViewBag.Error = error;
 
             return View("TokenView");
         }
 
+        public ActionResult Callback(string code, string state)
+        {
+            TokenModel token = new TokenModel();
+            String error = null;
+
+            if (!String.IsNullOrEmpty(code))
+            {
+                error = PerformTokenRequest(GenerateRequestPostData(code), out token);
+                if (String.IsNullOrEmpty(error))
+                {
+                    ViewBag.Token = token;
+                }
+            }
+
+            ViewBag.Error = error;
+
+            return View("TokenView");
+        }
+
+        private String PerformTokenRequest(String postData, out TokenModel token)
+        {
+            var error = String.Empty;
+            var strResponseData = String.Empty;
+
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(
+                ConfigurationManager.AppSettings["TokenUrl"]
+                );
+
+            webRequest.Method = "POST";
+            webRequest.ContentLength = postData.Length;
+            webRequest.ContentType = "application/x-www-form-urlencoded";
+
+            using (StreamWriter swRequestWriter = new StreamWriter(webRequest.GetRequestStream()))
+            {
+                swRequestWriter.Write(postData);
+            }
+
+            try
+            {
+                HttpWebResponse hwrWebResponse = (HttpWebResponse)webRequest.GetResponse();
+
+                if (hwrWebResponse.StatusCode == HttpStatusCode.OK)
+                {
+                    using (StreamReader srResponseReader = new StreamReader(hwrWebResponse.GetResponseStream()))
+                    {
+                        strResponseData = srResponseReader.ReadToEnd();
+                    }
+
+                    token = JsonConvert.DeserializeObject<TokenModel>(strResponseData);
+                    return null;
+                }
+            }
+            catch (WebException wex)
+            {
+                error = "Request Issue: " + wex.Message;
+            }
+            catch (Exception ex)
+            {
+                error = "Issue: " + ex.Message;
+            }
+
+            token = new TokenModel();
+            return error;
+        }
+
         public String GenerateAuthorizeUrl()
         {
-            //TODO: Add some form of state manager
-            return String.Format("{0}?client_id={1}&response_type=Assertion&state={2}&scope=preview_api_all%20preview_msdn_licensing&redirect_uri={3}",
+            return String.Format("{0}?client_id={1}&response_type=Assertion&state={2}&scope={3}&redirect_uri={4}",
                 ConfigurationManager.AppSettings["AuthUrl"],
                 ConfigurationManager.AppSettings["AppId"],
                 "state",
+                ConfigurationManager.AppSettings["Scope"],
                 ConfigurationManager.AppSettings["CallbackUrl"]
                 );
         }
 
-        public string GeneratePostData(string code)
+        public string GenerateRequestPostData(string code)
         {
             return string.Format("client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={0}&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion={1}&redirect_uri={2}",
                 HttpUtility.UrlEncode(ConfigurationManager.AppSettings["AppSecret"]),
                 HttpUtility.UrlEncode(code),
                 ConfigurationManager.AppSettings["CallbackUrl"]
                 );
-
         }
 
-	}
+        public string GenerateRefreshPostData(string refreshToken)
+        {
+            return string.Format("client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={0}&grant_type=refresh_token&assertion={1}&redirect_uri={2}",
+                HttpUtility.UrlEncode(ConfigurationManager.AppSettings["AppSecret"]),
+                HttpUtility.UrlEncode(refreshToken),
+                ConfigurationManager.AppSettings["CallbackUrl"]
+                );
+
+        }
+    }
 }

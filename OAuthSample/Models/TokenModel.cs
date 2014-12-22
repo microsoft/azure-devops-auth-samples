@@ -23,7 +23,6 @@ namespace OAuthSample.Models
         [JsonProperty(PropertyName = "refresh_token")]
         public String refreshToken { get; set; }
 
-        public String Error { get; set; }
     }
 
 }

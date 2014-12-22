@@ -2,12 +2,64 @@
     ViewBag.Title = "Details";
 }
 
+<style>
+
+    input[type=text], textarea {
+        font-family: monospace;
+        margin-bottom: 20px;
+        max-width: 660px;
+    }
+
+    #expiration {
+        max-width: 6em;
+    }
+
+</style>
+
 <h2>Token details</h2>
 
-<p><strong>Access token: </strong>@ViewBag.Token.accessToken</p>
-<p><strong>Token type: </strong>@ViewBag.Token.tokenType</p>
-<p><strong>Expires in: </strong>@ViewBag.Token.expiresIn (seconds)</p>
-<p><strong>Refresh token: </strong>@ViewBag.Token.refreshToken</p>
+@if (!String.IsNullOrEmpty(ViewBag.Error))
+{
+    <p>@ViewBag.Error</p>
+}
+else
+{
+    <script>
+        var expiration = @ViewBag.Token.expiresIn;
 
-<p>@ViewBag.Token.Error</p>
+        var startTime = Math.floor(Date.now() / 1000);
+        var timer = window.setInterval(updateExpiration, 1000);
+        function updateExpiration() {
+             var val = Math.max(0, expiration - (Math.floor(Date.now() / 1000) - startTime));
+             document.getElementById("expiration").value = val;
 
+             if (val == 0) {
+                 window.clearInterval(timer);
+             }
+        }
+
+        function selectAll(e)
+        {
+            e.focus();
+            e.select();
+        }
+
+    </script>
+
+    <form method="post" action="/oauth/refreshtoken">
+
+        <p>Access token:</p>
+        <textarea rows="6" cols="80" onfocus="selectAll(this)" onclick="selectAll(this)" readonly="readonly" >@ViewBag.Token.accessToken</textarea>
+
+        <p>Refresh token:</p>
+        <textarea rows="6" cols="80" name="refreshToken" onfocus="selectAll(this)" onclick="selectAll(this)" readonly="readonly">@ViewBag.Token.refreshToken</textarea>
+
+        <p>Expiration (seconds):</p>
+        <input type="text" id="expiration" value="@ViewBag.Token.expiresIn" readonly />
+
+        <p><input type="submit" value="Refresh Token" /></p>
+
+    </form>
+}
+
+<p><a href="/">Return to start</a></p>
