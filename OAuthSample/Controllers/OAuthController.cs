@@ -1,13 +1,11 @@
-﻿using Newtonsoft.Json;
-using OAuthSample.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using OAuthSample.Models;
 
 namespace OAuthSample.Controllers
 {
@@ -113,13 +111,18 @@ namespace OAuthSample.Controllers
 
         public String GenerateAuthorizeUrl()
         {
-            return String.Format("{0}?client_id={1}&response_type=Assertion&state={2}&scope={3}&redirect_uri={4}",
-                ConfigurationManager.AppSettings["AuthUrl"],
-                ConfigurationManager.AppSettings["AppId"],
-                "state",
-                ConfigurationManager.AppSettings["Scope"],
-                ConfigurationManager.AppSettings["CallbackUrl"]
-                );
+            UriBuilder uriBuilder = new UriBuilder(ConfigurationManager.AppSettings["AuthUrl"]);
+            var queryParams = HttpUtility.ParseQueryString(uriBuilder.Query ?? String.Empty);
+
+            queryParams["client_id"] = ConfigurationManager.AppSettings["AppId"];
+            queryParams["response_type"] = "Assertion";
+            queryParams["state"] = "state";
+            queryParams["scope"] = ConfigurationManager.AppSettings["Scope"];
+            queryParams["redirect_uri"] = ConfigurationManager.AppSettings["CallbackUrl"];
+
+            uriBuilder.Query = queryParams.ToString();
+
+            return uriBuilder.ToString();
         }
 
         public string GenerateRequestPostData(string code)
