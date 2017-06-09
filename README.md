@@ -31,7 +31,7 @@ To learn more about OAuth in Visual Studio Team Services, see [Authorize access 
 
 If everything is setup properly, Visual Studio Team Services will issue an access token and refresh token and both values will be displayed. **You should keep these values secret**. Also a new authorization will appear in [your profile page](https://app.vssps.visualstudio.com/Profile/View).
 
-With the access token you can invoke [Visual Studio Team Services REST APIs](http://www.visualstudio.com/integrate/reference/reference-vso-overview-vsi) by passing the access token in the Authorization header.FOr example:
+With the access token you can invoke [Visual Studio Team Services REST APIs](http://www.visualstudio.com/integrate/reference/reference-vso-overview-vsi) by passing the access token in the Authorization header. For example:
 
 ```
 Authorization: Bearer {access token}
