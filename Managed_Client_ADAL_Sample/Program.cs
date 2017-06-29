@@ -35,7 +35,9 @@ namespace SimpleAdalConsoleApp
                 throw ex.InnerException;
             }
 
-            do
+            //loop allows you to re-authenticate if you have authenticated with a user that does not have access
+            var unauthorizedAuthAgain = true;
+            while (unauthorizedAuthAgain)
             {
                 Console.WriteLine("({1}) Iteration {0}", iteration++, DateTime.UtcNow);
 
@@ -44,6 +46,7 @@ namespace SimpleAdalConsoleApp
                 try
                 {
                     ListProjects(VSTSAccountName, bearerAuthHeader);
+                    //unauthorizedAuthAgain = false;
                     Thread.Sleep(300000); //Sleep for 5 minutes
                 }
                 catch (UnauthorizedAccessException uae)
@@ -56,7 +59,6 @@ namespace SimpleAdalConsoleApp
                     Console.WriteLine("{0}: {1}", ex.GetType(), ex.Message);
                 }
             }
-            while (true);
         }
 
         private static AuthenticationContext GetAuthenticationContext(string tenant)

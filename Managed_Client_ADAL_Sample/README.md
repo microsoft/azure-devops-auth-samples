@@ -1,10 +1,10 @@
-# Using REST APIs with Adal (Adal C# Sample)
+# Managed Client ADAL Sample
 
-The Azure Active Directory Authentication Library (ADAL) enables client application developers to authenticate cloud users and obtain access tokens for API usage.
+The [Azure Active Directory Authentication Library (ADAL)](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries) enables client application developers to authenticate cloud users and obtain access tokens for API usage.
 
 ## Sample Application
 
-This buildable sample will walk you through the steps to create a native console application which uses ADAL to authenticate a user and return a list of all projects inside a selected VSTS account.
+This buildable sample will walk you through the steps to create a client-side console application which uses ADAL to authenticate a user via an interactive prompt and return a list of all projects inside a selected VSTS account.
 
 ## Step 1: Clone or download vsts-auth-samples repository
 
@@ -19,8 +19,8 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 
 ## Step 3: Run the sample
 
-1. Navigate to the cloned repo `Using REST APIs with ADAL (ADAL C# Sample)`
-2. Use [Nugget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have the latest package installed
+1. Navigate to the ADAL C# sample in cloned repo `vsts-auth-samples/Managed_Client_Sample_(ADAL_C#)/`
+2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
 2. Open the solution file `SimpleAdalConsoleApp.sln` in [Visual Studio IDE](https://www.visualstudio.com/downloads/)
 3. Open CS file `Program.cs` and there will be 3 input fields:
     * `VSTSResourceId` - Immutable value. Denotes that we need a VSTS access token.
