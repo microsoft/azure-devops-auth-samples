@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeviceProfileGetIdentityData
+namespace DeviceProfileSample
 {
     public class Program
     {
@@ -17,41 +17,18 @@ namespace DeviceProfileGetIdentityData
         public const string clientId_vs = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1";
         public static void Main(string[] args)
         {
-            string commandString = string.Empty;
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("***********************************************************");
-            Console.WriteLine("*                Get User Identity Data                   *");
-            Console.WriteLine("*                                                         *");
-            Console.WriteLine("*                                                         *");
-            Console.WriteLine("*                                                         *");
-            Console.WriteLine("***********************************************************");
-            Console.WriteLine("");
+            //============= Config [Edit these with your settings] =====================
+            var vstsAccountUri = "https://mseng.VisualStudio.com";
+            var restEndpoint = "_apis/projects?api-version=2.0";
+            //==========================================================================
 
-            // main command cycle
-            while (!commandString.Equals("Exit"))
-            {
-                Console.ResetColor();
-                Console.WriteLine("Enter command (userdata | exit) >");
-                commandString = Console.ReadLine();
+            UserData(vstsAccountUri,restEndpoint);
 
-                switch (commandString.ToUpper())
-                {
-                    case "USERDATA":
-                        UserData();
-                        break;
-                    case "EXIT":
-                        Console.WriteLine("Bye!");
-                        return;
-                        break;
-                    default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid command.");
-                        break;
-                }
-            }
+            //prevents console from closing immediately at the end of output
+            Console.ReadLine();
         }
 
-        static void UserData()
+        static void UserData(string vstsAccountUri, string restEndpoint)
         {
             //get auth token
             AuthenticationResult result = GetToken(null);
@@ -60,7 +37,7 @@ namespace DeviceProfileGetIdentityData
             //call VSTS REST API
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://app.vssps.visualstudio.com");
+                client.BaseAddress = new Uri(vstsAccountUri);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("User-Agent", "VstsRestApiSamples");
@@ -68,7 +45,7 @@ namespace DeviceProfileGetIdentityData
                 client.DefaultRequestHeaders.Authorization = authHeader;
 
                 //connect to REST endpoint
-                HttpResponseMessage response = client.GetAsync("_apis/connectiondata").Result;
+                HttpResponseMessage response = client.GetAsync(restEndpoint).Result;
 
                 if (response.IsSuccessStatusCode)
                 {

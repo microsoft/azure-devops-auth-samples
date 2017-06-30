@@ -4,7 +4,7 @@ For a headless text output client application, it is not possible authenticate t
 
 ## Sample Application
 
-This buildable sample will walk you through the steps to create a client-side console application which uses ADAL to authenticate a user via the [Device Profile flow](https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-deviceprofile/?v=17.23h) and returns a JSON string containing all VSTS identity data for the authenticated user.
+This buildable sample will walk you through the steps to create a client-side console application which uses ADAL to authenticate a user via the [Device Profile flow](https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-deviceprofile/?v=17.23h) and returns a JSON string containing all account team project data viewable by the authenticated user.
 
 ## Step 1: Clone or download vsts-auth-samples repository
 
@@ -19,11 +19,12 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 
 ## Step 3: Run the sample
 
-1. Navigate to the sample in cloned repo `vsts-auth-samples/Device_Profile_Sample/Device_Profile_Get_Identity_Data/`
+1. Navigate to the sample in cloned repo `vsts-auth-samples/Device_Profile_Sample/`
 2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
-3. Open the solution file `Device Profile - Get Identity Data.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
+3. Open the solution file `Device Profile Sample.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
 4. Open CS file `Program.cs` and there are 2 important fields to be aware of:
     * `VSTSResourceId` - Immutable value. Denotes that we need a VSTS access token.
     * `clientId` - Immutable value*. *Normally your app's registered AAD clientId, but for VSTS is must be the VS client ID provided
-    These fields are how we configure ADAL to aquire a VSTS access token for the authenticated user.
-5. Build and run solution. You should see a console window waiting for text input. Input `userdata` to start the Device Profile auth flow. After authenticating you should see VSTS identity information displayed in the console window.
+    * `vstsAccountUri` - Mutable value. Denotes your vsts account URL (i.e. https://myaccount.visualstudio.com). Please update this with your account URL
+    * `restEndpoint` - Mutable value. Denotes which REST API endpoint we want to hit. We have configured it to return team project information.
+5. Build and run solution. You should see a console window with instruction on how to authenticate via the Device Profile flow. After authenticating you should see all team project information viewable by the authenticated identity displayed in the console window.
