@@ -10,7 +10,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace SimpleAdalConsoleApp
+namespace ManagedClientConsoleAppSample
 {
     class Program
     { 

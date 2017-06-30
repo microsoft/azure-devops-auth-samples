@@ -7,8 +7,8 @@
     <ProjectGuid>{755BC9EF-A095-48DC-BBF6-AF39F8C3363E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleApplication1</RootNamespace>
-    <AssemblyName>ConsoleApplication1</AssemblyName>
+    <RootNamespace>ManagedClientConsoleAppSample</RootNamespace>
+    <AssemblyName>ManagedClientConsoleAppSample</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
