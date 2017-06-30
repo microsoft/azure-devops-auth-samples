@@ -19,9 +19,9 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 
 ## Step 3: Run the sample
 
-1. Navigate to the sample in cloned repo `vsts-auth-samples/Device_Profile_Sample/`
+1. Navigate to the sample in cloned repo `vsts-auth-samples/DeviceProfileSample/`
 2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
-3. Open the solution file `Device Profile Sample.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
+3. Open the solution file `DeviceProfileSample.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
 4. Open CS file `Program.cs` and there are 4 important fields to be aware of:
     * `VSTSResourceId` - Immutable value. Denotes that we need a VSTS access token.
     * `clientId` - Immutable value*. *Normally your app's registered AAD clientId, but for VSTS is must be the VS client ID provided.

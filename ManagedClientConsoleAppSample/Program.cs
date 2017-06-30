@@ -49,7 +49,7 @@ namespace ManagedClientConsoleAppSample
                     //unauthorizedAuthAgain = false;
                     Thread.Sleep(300000); //Sleep for 5 minutes
                 }
-                catch (UnauthorizedAccessException uae)
+                catch (UnauthorizedAccessException)
                 {
                     //prompts user with a login prompt, so they can login with a different user when receiving a 401 for the last authenticated user
                     result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri("urn:ietf:wg:oauth:2.0:oob"), new PlatformParameters(PromptBehavior.Always)).Result;

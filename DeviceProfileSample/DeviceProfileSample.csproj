@@ -8,7 +8,7 @@
     <Description>DirSearcherClient Console Application</Description>
     <Authors>Vittorio</Authors>
     <TargetFramework>netcoreapp1.0</TargetFramework>
-    <AssemblyName>DirSearcherClient</AssemblyName>
+    <AssemblyName>DeviceProfileSample</AssemblyName>
     <PackageId>DirSearcherClient</PackageId>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>

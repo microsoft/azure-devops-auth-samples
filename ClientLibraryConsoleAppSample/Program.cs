@@ -9,15 +9,15 @@ using Microsoft.VisualStudio.Services.Client;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 
-namespace ClienLibrariesConsoleApp
+namespace ClientLibraryConsoleAppSample
 {
-    class ClientLibrariesConsoleApp
+    class Program
     {
         //Console application to execute a user defined work item query
         static void Main(string[] args)
         {
             //=========== Config [edit these] ===================
-            string collectionUri = "https://peakyyy.visualstudio.com";
+            string collectionUri = "https://fabrikam-fiber-inc.visualstudio.com";
             Wiql query = new Wiql() { Query = "Select [State], [Title] from WorkItems where [Work Item Type] = 'Bug' And [Tags] Contains 'findMe'" };
             //===================================================
 

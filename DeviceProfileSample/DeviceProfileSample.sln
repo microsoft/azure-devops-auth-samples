@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device Profile sample", "Device Profile sample.csproj", "{3221E66C-4C5B-4EAD-A5BE-DA88A9AC3A34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeviceProfileSample", "DeviceProfileSample.csproj", "{3221E66C-4C5B-4EAD-A5BE-DA88A9AC3A34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
