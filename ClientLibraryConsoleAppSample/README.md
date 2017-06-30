@@ -15,9 +15,9 @@ git clone https://github.com/Microsoft/vsts-auth-samples.git
 
 ## Step 2: Run the sample
 
-1. Navigate to the sample in cloned repo `vsts-auth-samples/Client_Libraries_Sample/ClientLibrariesConsoleApp/`
+1. Navigate to the sample in cloned repo `vsts-auth-samples/ClientLibraryConsoleAppSample/`
 2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
-3. Open the solution file `ClientLibrariesConsoleApp.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
+3. Open the solution file `ClientLibraryConsoleAppSample.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
 4. Open CS file `Program.cs` and there will be 2 input fields:
     * `collectionUri` - Mutable value. This is the url to your VSTS/TFS account.
     * `query` - Mutable value. This is the WIQL query you want to execute. Replace this with any query you want to execute.
