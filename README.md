@@ -11,4 +11,4 @@ Learn more about [integrating with Team Services](https://www.visualstudio.com/d
 * [Managed Client ADAL Sample](./Managed_Client_ADAL_Sample/README.md)
 * [Device Profile Sample](./Device_Profile_Sample/Device_Profile_Get_Identity_Data/README.md)
 * [ASP.NET Web App OAuth Sample](./ASP.NET_Web_App_OAuth_Sample/aspnet/README.md)
-* [Client OM Sample](./Client_OM_Sample/ClientOmConsoleApp/README.md)
+* [Client Libraries Sample](./Client_Libraries_Sample/README.md)

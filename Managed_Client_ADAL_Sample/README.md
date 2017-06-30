@@ -19,14 +19,14 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 
 ## Step 3: Run the sample
 
-1. Navigate to the ADAL C# sample in cloned repo `vsts-auth-samples/Managed_Client_Sample_(ADAL_C#)/`
+1. Navigate to the ADAL C# sample in cloned repo `vsts-auth-samples/Managed_Client_ADAL_Sample/`
 2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
-2. Open the solution file `SimpleAdalConsoleApp.sln` in [Visual Studio IDE](https://www.visualstudio.com/downloads/)
-3. Open CS file `Program.cs` and there will be 3 input fields:
+3. Open the solution file `SimpleAdalConsoleApp.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
+4. Open CS file `Program.cs` and there will be 3 input fields:
     * `VSTSResourceId` - Immutable value. Denotes that we need a VSTS access token.
     * `clientId` - Immutable value*. *Normally your app's registered AAD clientId, but for VSTS is must be the VS client ID provided
     * `VSTSAccountName` - Mutable value. Update with the name of the VSTS account you would like to access. (e.g. "myaccount" from myaccount.visualstuido.com)
-4. Build and run solution. After running you should see a list of all projects inside of myaccount.
+5. Build and run solution. After running you should see a list of all projects inside of myaccount.
 
 
 

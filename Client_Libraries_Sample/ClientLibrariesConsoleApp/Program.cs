@@ -9,9 +9,9 @@ using Microsoft.VisualStudio.Services.Client;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 
-namespace ClienOmConsoleApp
+namespace ClienLibrariesConsoleApp
 {
-    class ClientOmConsoleApp
+    class ClientLibrariesConsoleApp
     {
         //Console application to execute a user defined work item query
         static void Main(string[] args)

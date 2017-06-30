@@ -11,3 +11,19 @@ This buildable sample will walk you through the steps to create a client-side co
 From a shell or command line: 
 ```no-highlight
 git clone https://github.com/Microsoft/vsts-auth-samples.git
+```
+
+## Step 2: Install and configure ADAL (optional)
+
+Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been installed and configured in the sample, but if you are adding to your own project you will need to [install and configure it yourself](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory). 
+
+## Step 3: Run the sample
+
+1. Navigate to the sample in cloned repo `vsts-auth-samples/Device_Profile_Sample/Device_Profile_Get_Identity_Data/`
+2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
+3. Open the solution file `Device Profile - Get Identity Data.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
+4. Open CS file `Program.cs` and there are 2 important fields to be aware of:
+    * `VSTSResourceId` - Immutable value. Denotes that we need a VSTS access token.
+    * `clientId` - Immutable value*. *Normally your app's registered AAD clientId, but for VSTS is must be the VS client ID provided
+    These fields are how we configure ADAL to aquire a VSTS access token for the authenticated user.
+5. Build and run solution. You should see a console window waiting for text input. Input `userdata` to start the Device Profile auth flow. After authenticating you should see VSTS identity information displayed in the console window.
