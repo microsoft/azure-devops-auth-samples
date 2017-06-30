@@ -22,9 +22,9 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 1. Navigate to the sample in cloned repo `vsts-auth-samples/Device_Profile_Sample/`
 2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
 3. Open the solution file `Device Profile Sample.sln` in [Visual Studio IDE 2017](https://www.visualstudio.com/downloads/)
-4. Open CS file `Program.cs` and there are 2 important fields to be aware of:
+4. Open CS file `Program.cs` and there are 4 important fields to be aware of:
     * `VSTSResourceId` - Immutable value. Denotes that we need a VSTS access token.
-    * `clientId` - Immutable value*. *Normally your app's registered AAD clientId, but for VSTS is must be the VS client ID provided
-    * `vstsAccountUri` - Mutable value. Denotes your vsts account URL (i.e. https://myaccount.visualstudio.com). Please update this with your account URL
+    * `clientId` - Immutable value*. *Normally your app's registered AAD clientId, but for VSTS is must be the VS client ID provided.
+    * `vstsAccountUri` - Mutable value. Denotes your vsts account URL (i.e. https://myaccount.visualstudio.com). Please update this with your account URL.
     * `restEndpoint` - Mutable value. Denotes which REST API endpoint we want to hit. We have configured it to return team project information.
 5. Build and run solution. You should see a console window with instruction on how to authenticate via the Device Profile flow. After authenticating you should see all team project information viewable by the authenticated identity displayed in the console window.
