@@ -4,9 +4,11 @@
 
 Samples that show how to auth with Visual Studio Team Services and Team Foundation Server.
 
-Learn more about [integrating with Team Services](https://www.visualstudio.com/docs/integrate/extensions/overview)
+Learn more about [integrating with Team Services](https://www.visualstudio.com/docs/integrate/extensions/overview) and [specific authentication guidence](https://www.visualstudio.com/en-us/docs/integrate/get-started/auth/authentication_guidance)
 
 ## Samples
 
-* [ASP.NET web app](dotnet/aspnet/README.md)
-
+* [Managed client sample (using Azure Active Directory Auth)](./ManagedClientConsoleAppSample/README.md)
+* [Device profile sample (.NET Core)](./DeviceProfileSample/README.md)
+* [ASP.NET Web app OAuth sample](./OAuthWebSample/README.md)
+* [Client library sample](./ClientLibraryConsoleAppSample/README.md)
