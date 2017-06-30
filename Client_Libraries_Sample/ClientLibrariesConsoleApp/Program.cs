@@ -21,7 +21,7 @@ namespace ClienLibrariesConsoleApp
             Wiql query = new Wiql() { Query = "Select [State], [Title] from WorkItems where [Work Item Type] = 'Bug' And [Tags] Contains 'findMe'" };
             //===================================================
 
-            //Prmot user for credential for collection specified above
+            //Prompt user for credential for collection specified above
             VssCredentials cred = new VssClientCredentials(false);
             cred.PromptType = CredentialPromptType.PromptIfNeeded;
             VssConnection connection = new VssConnection(new Uri(collectionUri), cred);
