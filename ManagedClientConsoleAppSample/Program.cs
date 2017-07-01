@@ -14,14 +14,16 @@ namespace ManagedClientConsoleAppSample
 {
     class Program
     { 
+        //============= Config [Edit these with your settings] =====================
+        internal const string vstsCollectionUrl = "http://myaccount.visualstudio.com"; //change to the URL of your VSTS account
+        // internal const string vstsCollectioUrl = "http://myserver:8080/tfs/DefaultCollection" alternate URL for a TFS collection
+        //==========================================================================
+
         internal const string VSTSResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Static value to target VSTS. Do not change
         internal const string clientId = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1"; //VS ClientId. Please use this instead of your app's clientId
-        internal const string VSTSAccountName = "myaccount"; //change to domain of your VSTS account (e.g. "myaccount" when account name is myaccount.visualstudio.com) 
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            int iteration = 0;
-            
             AuthenticationContext ctx = GetAuthenticationContext(null);
             AuthenticationResult result = null;
             try
@@ -29,35 +31,18 @@ namespace ManagedClientConsoleAppSample
                 //PromptBehavior.RefreshSession will enforce an authn prompt every time. NOTE: Auto will take your windows login state if possible
                 result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri("urn:ietf:wg:oauth:2.0:oob"), new PlatformParameters(PromptBehavior.Auto)).Result;
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
+
+                var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
+                ListProjects(VSTSAccountName, bearerAuthHeader);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // If the token has expired, prompt the user with a login prompt
+                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri("urn:ietf:wg:oauth:2.0:oob"), new PlatformParameters(PromptBehavior.Always)).Result;
             }
             catch (Exception ex)
             {
-                throw ex.InnerException;
-            }
-
-            //loop allows you to re-authenticate if you have authenticated with a user that does not have access
-            var unauthorizedAuthAgain = true;
-            while (unauthorizedAuthAgain)
-            {
-                Console.WriteLine("({1}) Iteration {0}", iteration++, DateTime.UtcNow);
-
-                var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-
-                try
-                {
-                    ListProjects(VSTSAccountName, bearerAuthHeader);
-                    //unauthorizedAuthAgain = false;
-                    Thread.Sleep(300000); //Sleep for 5 minutes
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    //prompts user with a login prompt, so they can login with a different user when receiving a 401 for the last authenticated user
-                    result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri("urn:ietf:wg:oauth:2.0:oob"), new PlatformParameters(PromptBehavior.Always)).Result;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("{0}: {1}", ex.GetType(), ex.Message);
-                }
+                Console.WriteLine("{0}: {1}", ex.GetType(), ex.Message);
             }
         }
 
@@ -84,7 +69,7 @@ namespace ManagedClientConsoleAppSample
             // use the httpclient
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(String.Format("https://{0}.visualstudio.com", vstsAccountName));
+                client.BaseAddress = new Uri(vstsCollectionUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("User-Agent", "VstsRestApiSamples");

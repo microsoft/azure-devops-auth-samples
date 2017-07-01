@@ -13,21 +13,22 @@ namespace ClientLibraryConsoleAppSample
 {
     class Program
     {
+        //============= Config [Edit these with your settings] =====================
+        internal const string vstsCollectionUrl = "http://myaccount.visualstudio.com"; //change to the URL of your VSTS account
+        // internal const string vstsCollectioUrl = "http://myserver:8080/tfs/DefaultCollection" alternate URL for a TFS collection
+        //==========================================================================
+
         //Console application to execute a user defined work item query
         static void Main(string[] args)
         {
-            //=========== Config [edit these] ===================
-            string collectionUri = "https://fabrikam-fiber-inc.visualstudio.com";
-            Wiql query = new Wiql() { Query = "Select [State], [Title] from WorkItems where [Work Item Type] = 'Bug' And [Tags] Contains 'findMe'" };
-            //===================================================
-
             //Prompt user for credential for collection specified above
             VssCredentials cred = new VssClientCredentials(false);
             cred.PromptType = CredentialPromptType.PromptIfNeeded;
-            VssConnection connection = new VssConnection(new Uri(collectionUri), cred);
+            VssConnection connection = new VssConnection(new Uri(vstsCollectionUrl), cred);
 
             //create http client and query for resutls
             WorkItemTrackingHttpClient witClient = connection.GetClient<WorkItemTrackingHttpClient>();
+            Wiql query = new Wiql() { Query = "Select [State], [Title] from WorkItems where [Work Item Type] = 'Bug' And [Tags] Contains 'findMe'" };
             WorkItemQueryResult queryResults = witClient.QueryByWiqlAsync(query).Result;
 
             //Display reults in console
@@ -42,13 +43,6 @@ namespace ClientLibraryConsoleAppSample
                     Console.WriteLine(item.Id);
                 }
             }
-
-            //prevetns console from closing
-            while (true)
-            {
-
-            }
-
         }
     }
 }
