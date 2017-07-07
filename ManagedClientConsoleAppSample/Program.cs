@@ -33,7 +33,7 @@ namespace ManagedClientConsoleAppSample
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-                ListProjects(VSTSAccountName, bearerAuthHeader);
+                ListProjects(bearerAuthHeader);
             }
             catch (UnauthorizedAccessException)
             {
@@ -64,7 +64,7 @@ namespace ManagedClientConsoleAppSample
             return ctx;
         }
 
-        private static void ListProjects(string vstsAccountName, AuthenticationHeaderValue authHeader)
+        private static void ListProjects(AuthenticationHeaderValue authHeader)
         {
             // use the httpclient
             using (var client = new HttpClient())
@@ -72,7 +72,7 @@ namespace ManagedClientConsoleAppSample
                 client.BaseAddress = new Uri(vstsCollectionUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("User-Agent", "VstsRestApiSamples");
+                client.DefaultRequestHeaders.Add("User-Agent", "ManagedClientConsoleAppSample");
                 client.DefaultRequestHeaders.Add("X-TFS-FedAuthRedirect", "Suppress");
                 client.DefaultRequestHeaders.Authorization = authHeader;
 
