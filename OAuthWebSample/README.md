@@ -2,7 +2,7 @@
 
 This sample shows how to prompt a user to authorize a cloud service that can call APIs on Visual Studio Team Services on behalf of the user.
 
-To learn more about OAuth in Visual Studio Team Services, see [Authorize access with OAuth 2.0](https://www.visualstudio.com/docs/integrate/get-started/auth/oauth)
+To learn more about OAuth in Visual Studio Team Services, see [Authorize access with OAuth 2.0](https://www.visualstudio.com/docs/integrate/get-started/authentication/oauth)
 
 ## How to setup
 

@@ -13,106 +13,83 @@ namespace DeviceProfileSample
 {
     public class Program
     {
-        public const string resource_vsts = "499b84ac-1321-427f-aa17-267ca6975798";
-        public const string clientId_vs = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1";
+        //============= Config [Edit these with your settings] =====================
+        internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
+        //==========================================================================
+
+        internal const string VSTSResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Static value to target VSTS. Do not change
+        internal const string clientId = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1"; //VS ClientId. Please use this instead of your app's clientId
+
         public static void Main(string[] args)
         {
-            //============= Config [Edit these with your settings] =====================
-            var vstsAccountUri = "https://mseng.VisualStudio.com";
-            var restEndpoint = "_apis/projects?api-version=2.0";
-            //==========================================================================
-
-            UserData(vstsAccountUri,restEndpoint);
-
-            //prevents console from closing immediately at the end of output
-            Console.ReadLine();
-        }
-
-        static void UserData(string vstsAccountUri, string restEndpoint)
-        {
-            //get auth token
-            AuthenticationResult result = GetToken(null);
-            var authHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-
-            //call VSTS REST API
-            using (var client = new HttpClient())
+            AuthenticationContext ctx = GetAuthenticationContext(null);
+            AuthenticationResult result = null;
+            try
             {
-                client.BaseAddress = new Uri(vstsAccountUri);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("User-Agent", "VstsRestApiSamples");
-                client.DefaultRequestHeaders.Add("X-TFS-FedAuthRedirect", "Suppress");
-                client.DefaultRequestHeaders.Authorization = authHeader;
+                DeviceCodeResult codeResult = ctx.AcquireDeviceCodeAsync(VSTSResourceId, clientId).Result;
+                Console.WriteLine("You need to sign in.");
+                Console.WriteLine("Message: " + codeResult.Message + "\n");
+                result = ctx.AcquireTokenByDeviceCodeAsync(codeResult).Result;
 
-                //connect to REST endpoint
-                HttpResponseMessage response = client.GetAsync(restEndpoint).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine("\tSuccessful REST call\n");
-                    Console.WriteLine(response.Content.ReadAsStringAsync().Result);
-                }
-                else
-                {
-                    Console.WriteLine("{0}:{1}", response.StatusCode, response.ReasonPhrase);
-                }
+                var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
+                ListProjects(bearerAuthHeader);
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Something went wrong.");
+                Console.WriteLine("Message: " + ex.Message + "\n");
             }
         }
 
-        static AuthenticationResult GetToken(string tenant)
+        private static AuthenticationContext GetAuthenticationContext(string tenant)
         {
             AuthenticationContext ctx = null;
             if (tenant != null)
                 ctx = new AuthenticationContext("https://login.microsoftonline.com/" + tenant);
             else
             {
-                ctx = new AuthenticationContext("https://login.microsoftonline.com/common");
+                ctx = new AuthenticationContext("https://login.windows.net/common");
                 if (ctx.TokenCache.Count > 0)
                 {
                     string homeTenant = ctx.TokenCache.ReadItems().First().TenantId;
                     ctx = new AuthenticationContext("https://login.microsoftonline.com/" + homeTenant);
                 }
             }
-            AuthenticationResult result = null;
-            try
+
+            return ctx;
+        }
+
+        private static void ListProjects(AuthenticationHeaderValue authHeader)
+        {
+            // use the httpclient
+            using (var client = new HttpClient())
             {
-                result = ctx.AcquireTokenSilentAsync(resource_vsts, clientId_vs).Result;
-            }
-            catch (Exception exc)
-            {
-                var adalEx = exc.InnerException as AdalException;
-                if ((adalEx != null) && (adalEx.ErrorCode == "failed_to_acquire_token_silently"))
+                client.BaseAddress = new Uri(vstsCollectionUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("User-Agent", "VstsRestApiSamples");
+                client.DefaultRequestHeaders.Add("X-TFS-FedAuthRedirect", "Suppress");
+                client.DefaultRequestHeaders.Authorization = authHeader;
+
+                // connect to the REST endpoint            
+                HttpResponseMessage response = client.GetAsync("_apis/projects?stateFilter=All&api-version=2.2").Result;
+
+                // check to see if we have a succesfull respond
+                if (response.IsSuccessStatusCode)
                 {
-                    result = GetTokenViaCode(ctx);
+                    Console.WriteLine("\tSuccesful REST call");
+                    Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    throw new UnauthorizedAccessException();
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Something went wrong.");
-                    Console.WriteLine("Message: " + exc.InnerException.Message + "\n");
+                    Console.WriteLine("{0}:{1}", response.StatusCode, response.ReasonPhrase);
                 }
             }
-            return result;
-        }
-
-        static AuthenticationResult GetTokenViaCode(AuthenticationContext ctx)
-        {
-            AuthenticationResult result = null;
-            try
-            {
-                DeviceCodeResult codeResult = ctx.AcquireDeviceCodeAsync(resource_vsts, clientId_vs).Result;
-                Console.ResetColor();
-                Console.WriteLine("You need to sign in.");
-                Console.WriteLine("Message: " + codeResult.Message + "\n");
-                result = ctx.AcquireTokenByDeviceCodeAsync(codeResult).Result;
-            }
-            catch (Exception exc)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Something went wrong.");
-                Console.WriteLine("Message: " + exc.Message + "\n");
-            }
-            return result;
         }
     }
 }
