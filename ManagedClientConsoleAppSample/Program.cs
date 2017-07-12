@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using System.Net.Http.Headers;
 using System.Net.Http;
-using System.Threading;
-using Newtonsoft.Json;
-using System.IO;
+using System.Net.Http.Headers;
 
 namespace ManagedClientConsoleAppSample
 {
     class Program
-    { 
+    {
         //============= Config [Edit these with your settings] =====================
-        internal const string vstsCollectionUrl = "http://myaccount.visualstudio.com"; //change to the URL of your VSTS account
+        internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
         // internal const string vstsCollectioUrl = "http://myserver:8080/tfs/DefaultCollection" alternate URL for a TFS collection
         //==========================================================================
 
@@ -29,7 +23,7 @@ namespace ManagedClientConsoleAppSample
             try
             {
                 //PromptBehavior.RefreshSession will enforce an authn prompt every time. NOTE: Auto will take your windows login state if possible
-                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri("urn:ietf:wg:oauth:2.0:oob"), new PlatformParameters(PromptBehavior.Auto)).Result;
+                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri("urn:ietf:wg:oauth:2.0:oob"), new PlatformParameters(PromptBehavior.Always)).Result;
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
