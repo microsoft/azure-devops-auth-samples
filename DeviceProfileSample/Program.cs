@@ -31,15 +31,14 @@ namespace DeviceProfileSample
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-                ListProjects(VSTSAccountName, bearerAuthHeader);
+                ListProjects(bearerAuthHeader);
             }
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Something went wrong.");
-                Console.WriteLine("Message: " + exc.Message + "\n");
+                Console.WriteLine("Message: " + ex.Message + "\n");
             }
-            return result;
         }
 
         private static AuthenticationContext GetAuthenticationContext(string tenant)
@@ -60,7 +59,7 @@ namespace DeviceProfileSample
             return ctx;
         }
 
-        private static void ListProjects(string vstsAccountName, AuthenticationHeaderValue authHeader)
+        private static void ListProjects(AuthenticationHeaderValue authHeader)
         {
             // use the httpclient
             using (var client = new HttpClient())
