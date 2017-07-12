@@ -14,7 +14,7 @@ namespace DeviceProfileSample
     public class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string vstsCollectionUrl = "http://myaccount.visualstudio.com"; //change to the URL of your VSTS account
+        internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
         //==========================================================================
 
         internal const string VSTSResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Static value to target VSTS. Do not change
@@ -27,8 +27,9 @@ namespace DeviceProfileSample
             try
             {
                 DeviceCodeResult codeResult = ctx.AcquireDeviceCodeAsync(VSTSResourceId, clientId).Result;
+                Console.WriteLine("You need to sign in.");
+                Console.WriteLine("Message: " + codeResult.Message + "\n");
                 result = ctx.AcquireTokenByDeviceCodeAsync(codeResult).Result;
-                Console.WriteLine("Token expires on: " + result.ExpiresOn);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
                 ListProjects(bearerAuthHeader);
