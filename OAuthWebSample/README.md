@@ -14,7 +14,7 @@ To learn more about OAuth in Visual Studio Team Services, see [Authorize access 
 3. Open the solution (VstsOAuthSample.sln) in Visual Studio 2015 or later
 4. Update the following settings in web.config to match the values in the app you just registered:
   *  App ID
-  *  App Secret
+  *  App Secret (use the "Client Secret" shown on the VSTS Application Settings page, not the App Secret)
   *  Scope (space separated)
   *  Callback URL
 5. Build the solution (this will trigger a NuGet package restore, which will pull in all dependencies of the project)
