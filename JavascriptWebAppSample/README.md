@@ -1,4 +1,4 @@
-# ADAL JS Sample
+# Javascirpt Web App Sample
 
 The [Azure Active Directory Authentication Library (ADAL)](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries) enables client application developers to authenticate cloud users and obtain access tokens for API usage.
 

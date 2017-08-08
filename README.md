@@ -12,3 +12,4 @@ Learn more about [integrating with Team Services](https://www.visualstudio.com/d
 * [Device profile sample (.NET Core)](./DeviceProfileSample/README.md)
 * [ASP.NET Web app OAuth sample](./OAuthWebSample/README.md)
 * [Client library sample (using VSSConnection)](./ClientLibraryConsoleAppSample/README.md)
+* [Javascript web app sample (using Azure Active Directory JS Library)](./JavascriptWebAppSample/README.md)
