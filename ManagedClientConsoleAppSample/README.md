@@ -4,7 +4,7 @@ The [Azure Active Directory Authentication Library (ADAL)](https://docs.microsof
 
 ## Sample Application
 
-This buildable sample will walk you through the steps to create a client-side console application which uses ADAL to authenticate a user via an interactive prompt and return a list of all projects inside a selected VSTS account.
+This buildable sample will walk you through the steps to create a client-side console application which uses ADAL to authenticate a user via an interactive prompt and return a list of all projects inside a selected VSTS account/TFS collection.
 
 To run this sample you will need:
 * Visual Studio 2017

@@ -4,7 +4,7 @@ The [Azure Active Directory Authentication Library (ADAL)](https://docs.microsof
 
 ## Sample Application
 
-This buildable sample will walk you through the steps to create single page javascript application which uses ADAL to authenticate a user via an interactive prompt and all VSTS known information associated with the signed in identity.
+This buildable sample will walk you through the steps to create single page javascript application which uses ADAL to authenticate a user via an interactive prompt and display all project contained in a VSTS account/TFS collection.
 
 To run this sample you will need:
 * Http-server. You can download [NPM http server](https://www.npmjs.com/package/http-server) if you need one.
@@ -35,10 +35,10 @@ git clone https://github.com/Microsoft/vsts-auth-samples.git
 2. Inside `index.html` there is a section of `Input Vars` you can update to run the sample:
     * `clientId` - (Required) update this with the `application id` you saved from `portal.azure.com`
     * `replyUri` - (optional) update this if you are hosting `index.html` at an address other than `hottp://localhost:8080`
-    * `vstsApi` - (optional) update this if you would like to the sample to run a different VSTS API
+    * `vstsApi` - (Required) update this with your VSTS/TFS collection, e.g. http://myaccount.visualstudio.com/DefaultCollection/_apis/projects?api-version=2.0 for VSTS or http://myserver:8080/tfs/DefaultCollection/_apis/projects?api-version=2.0 for TFS. If you would like to the sample to run a different VSTS API please change the entire string
     * `vstsResourceId` - Do not change this value. It is used to receive VSTS ADAL authentication tokens
 3. Navigate to the ADAL JS sample in cloned repo `vsts-auth-samples/AdalJsSample/` and start your http-server which will serve `index.hmtl` at `http://localhost:8080`.
-4. Navigate to `http://localhost:8080`. Sign in with a user account from your AAD tenant which has access to at least 1 VSTS account. Displayed should be all VSTS known identity infromation about the signed in user account.
+4. Navigate to `http://localhost:8080`. Sign in with a user account from your AAD tenant which has access to the VSTS account specified in the `vstsApi`. All projects contained in the account should be displayed.
 
 
 

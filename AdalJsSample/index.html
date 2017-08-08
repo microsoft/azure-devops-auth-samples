@@ -18,16 +18,24 @@
         <pre id="api_response"></pre>
 
         <script type="text/javascript">
+            //========= Input Vars ================================
+            var clientId = '57c5c51c-2036-433a-befa-ebefc7f10689'; //Update with your app regirstion's Application ID
+            var replyUri = 'http://localhost:8080'; //Update if hosting webpage non-locally
+            var vstsApi = 'https://myaccount.visualstudio.com/DefaultCollection/_apis/projects?api-version=2.0';//'https://app.vssps.visualstudio.com/_apis/profile/profiles/me?api-version=1.0';//Update if want to access a different vsts API
+            var vstsResourceId = '499b84ac-1321-427f-aa17-267ca6975798'; //Do not change
+            //=====================================================
+            
             // Set up ADAL
             var authContext = new AuthenticationContext({
-                clientId: '57c5c51c-2036-433a-befa-ebefc7f10689',//Update with your app regirstion's Application ID
-                postLogoutRedirectUri: 'http://localhost:8080' //Where you return upon signout
+                clientId: clientId,
+                postLogoutRedirectUri: replyUri //Where you return upon signout
             });
             // Make an AJAX request to the VSTS REST API and print the response as JSON.
-            var getCurrentUser = function (access_token) {
+            var getCurrentUserInfo = function (access_token) {
                 document.getElementById('api_response').textContent = 'Calling API...';
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'https://app.vssps.visualstudio.com/_apis/profile/profiles/me?api-version=1.0', true); //API called with ADAL token
+                //API called with ADAL token
+                xhr.open('GET', vstsApi, true);
                 xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -47,7 +55,7 @@
                 authContext.handleWindowCallback();
                 var err = authContext.getLoginError();
                 if (err) {
-                    // TODO: Handle errors signing in and getting tokens
+                    // Handle error
                     document.getElementById('api_response').textContent =
                         'ERROR:\n\n' + err;
                 }
@@ -58,18 +66,17 @@
                     document.getElementById('username').textContent = 'Signed in as: ' + user.userName;
                     document.getElementById('api_response').textContent = 'Getting access token...';
                     
-                    // Get an access token to the Microsoft Graph API
+                    // Get an access token to VSTS
                     authContext.acquireToken(
-                        '499b84ac-1321-427f-aa17-267ca6975798',
+                        vstsResourceId,
                         function (error, token) {
                             if (error || !token) {
-                                // TODO: Handle error obtaining access token
                                 document.getElementById('api_response').textContent =
                                     'ERROR:\n\n' + error;
                                 return;
                             }
                             // Use the access token
-                            getCurrentUser(token);
+                            getCurrentUserInfo(token);
                         }
                     );
                 } else {
