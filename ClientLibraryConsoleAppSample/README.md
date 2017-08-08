@@ -1,6 +1,6 @@
 # Client Libraries Sample
 
-The [Client Libraries](https://www.visualstudio.com/en-us/docs/integrate/get-started/client-libraries/dotnet) are .NET libraries made to simplify integration with Visual Studio Team Services and Team Foundation Server (2015 and later). They allow access to both the Traditional Client Object Model and [new REST APIs](https://www.visualstudio.com/en-us/docs/integrate/api/overview).
+For native applications the best way to authenticate and access VSTS resources is using the [Client Libraries](https://www.visualstudio.com/en-us/docs/integrate/get-started/client-libraries/dotnet). They are .NET libraries made to simplify integration with Visual Studio Team Services and Team Foundation Server (2015 and later). They allow access to both the Traditional Client Object Model and [new REST APIs](https://www.visualstudio.com/en-us/docs/integrate/api/overview).
 
 ## Sample Application
 

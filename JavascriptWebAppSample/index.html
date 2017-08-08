@@ -20,15 +20,17 @@
         <script type="text/javascript">
             //========= Input Vars ================================
             var clientId = '57c5c51c-2036-433a-befa-ebefc7f10689'; //Update with your app regirstion's Application ID
-            var replyUri = 'http://localhost:8080'; //Update if hosting webpage non-locally
-            var vstsApi = 'https://myaccount.visualstudio.com/DefaultCollection/_apis/projects?api-version=2.0';//'https://app.vssps.visualstudio.com/_apis/profile/profiles/me?api-version=1.0';//Update if want to access a different vsts API
+            var replyUri = 'http://localhost:8080'; //Where you will receive the token. 
+            var logoutRedirectUri = 'http://localhost:8080'; //Update if you are hosting your webpage somewhere else
+            var vstsApi = 'https://myaccount.visualstudio.com/_apis/projects?api-version=2.0';//'https://app.vssps.visualstudio.com/_apis/profile/profiles/me?api-version=1.0';//Update if want to access a different vsts API
             var vstsResourceId = '499b84ac-1321-427f-aa17-267ca6975798'; //Do not change
             //=====================================================
             
             // Set up ADAL
             var authContext = new AuthenticationContext({
                 clientId: clientId,
-                postLogoutRedirectUri: replyUri //Where you return upon signout
+                redirectUri:replyUri,
+                postLogoutRedirectUri: logoutRedirectUri //Where you return upon signout
             });
             // Make an AJAX request to the VSTS REST API and print the response as JSON.
             var getCurrentUserInfo = function (access_token) {
