@@ -12,7 +12,7 @@ namespace ManagedClientConsoleAppSample
         internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
         // internal const string vstsCollectioUrl = "http://myserver:8080/tfs/DefaultCollection" alternate URL for a TFS collection
         internal const string clientId = "0fa17cf4-f75c-4185-ab9a-7c5ea47ca073"; //change to your app registration's Application ID
-        internal const string replyUri = "http://adaljssample"; //change to your app registration's reply URI.
+        internal const string replyUri = "http://adalsample"; //change to your app registration's reply URI.
         //==========================================================================
 
         internal const string VSTSResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Constant value to target VSTS. Do not change  
