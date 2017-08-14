@@ -1,12 +1,10 @@
-# Managed Client ADAL Sample
+# VSTS TFS Client Sample
 
-For native applications which can support interative authentication prompts, the [Azure Active Directory Authentication Library (ADAL)](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries) makes it easy to setup authentication flows for users.
-
-For native applications which cannot support interactive authentication prompts, please check out our [Device Profile Sample](./../DeviceProfileSample/README.md).
+For windows native applications which want to target both VSTS and TFS we recommend using [Azure Active Directory Authentication Library (ADAL)](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries) to generate interactive sign in prompts for VSTS users and [Client Libraries for VSTS and TFS](https://www.visualstudio.com/en-us/docs/integrate/get-started/client-libraries/dotnet) to leverage Windows credential authentication for TFS users.
 
 ## Sample Application
 
-This buildable sample will walk you through the steps to create a client-side console application which uses ADAL to authenticate a user via an interactive prompt and return a list of all projects inside a selected VSTS account/TFS collection.
+This buildable sample will walk you through the steps to create a client-side console application which uses ADAL and Client Libraries - Windows Auth to authenticate a VSTS or TFS user and return a list of all projects inside a selected VSTS account or TFS collection.
 
 To run this sample you will need:
 * [Visual Studio IDE](https://www.visualstudio.com/vs/)
@@ -31,17 +29,17 @@ git clone https://github.com/Microsoft/vsts-auth-samples.git
 6. Save the `Application ID` from your new application registration. You will need it later in this sample.
 7. Grant Permissions for VSTS. Click `Required permissions` -> `add` -> `1 Select an API` -> type in and select `Microsoft Visual Studio Team Services` -> check the box for `Have full access to...` -> click `Save` -> click `Grant Permissions` -> click `Yes`.
 
-## Step 3: Install and configure ADAL (optional)
+## Step 3: Install and configure ADAL and Client libraries (optional)
 
-Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been installed and configured in the sample, but if you are adding to your own project you will need to [install and configure it yourself](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory). 
+Packages: [Microsoft.Identity.Model.Clients.ActiveDirectory](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory), [Microsoft.VisualStudio.Services.Client](https://www.nuget.org/packages/Microsoft.VisualStudio.Services.Client), and [Microsoft.TeamFoundation.Core.WebApi](https://www.nuget.org/packages/Microsoft.TeamFoundationServer.Client) have already been installed and configured in the sample, but if you are adding to your own project you will need to install and configure it yourself.
 
 ## Step 4: Run the sample
 
-1. Navigate to the ADAL C# sample in cloned repo `vsts-auth-samples/ManagedClientConsoleAppSample/`.
+1. Navigate to the ADAL C# sample in cloned repo `vsts-auth-samples/VstsTfsSample/`.
 2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed.
-3. Open the solution file `ManagedClientConsoleAppSample.sln` in [Visual Studio 2017](https://www.visualstudio.com/downloads/).
+3. Open the solution file `VstsTfsSample.sln` in [Visual Studio 2017](https://www.visualstudio.com/downloads/).
 4. Open CS file `Program.cs` and there is a section with input values to change at the top of the class:
-    * `vstsCollectionUrl` - update this with the url to your VSTS/TFS collection, e.g. http://myaccount.visualstudio.com for VSTS or http://myserver:8080/tfs/DefaultCollection for TFS.
+    * `vstsOrTfsCollectionUrl` - update this with the url to your VSTS/TFS collection, e.g. http://myaccount.visualstudio.com for VSTS or http://myserver:8080/tfs/DefaultCollection for TFS.
     * `clientId` - update this with the `application id` you saved from `portal.azure.com`
     * `replyUri` - we have set this to `http://adalsample`, but please update it as necessary for your own app.
 5. Build and run solution. After running you should see an interactive login prompt. Then after authentication and authorization, a list of all projects inside of your account.
