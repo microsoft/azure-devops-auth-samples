@@ -13,3 +13,4 @@ Learn more about [integrating with Team Services](https://www.visualstudio.com/d
 * [ASP.NET Web app OAuth sample](./OAuthWebSample/README.md)
 * [Client library sample (using VSSConnection)](./ClientLibraryConsoleAppSample/README.md)
 * [Javascript web app sample (using Azure Active Directory JS Library)](./JavascriptWebAppSample/README.md)
+* [Dual Support (VSTS/TFS) Client Sample (using Azure Active Directory Library and Windows Authentication)](./VstsTfsSample/README.md)

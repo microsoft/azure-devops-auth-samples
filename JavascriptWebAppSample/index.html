@@ -3,7 +3,7 @@
     <head>
         <title>VSTS Autentication ADAL.JS Sample</title>
         <meta charset="utf-8" />
-        <style type="text/css">body { font-family: Tahoma; padding: 3em; }</style>
+        <style type="text/css">body { font-family: Tahoma; padding: 3em; } </style>
         <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.11/js/adal.min.js"></script>
     </head>
     <body>
@@ -11,47 +11,32 @@
             VSTS Authentication - ADAL.JS Sample
         </p>
         <p>
-            <a href="#" onclick="authContext.login(); return false;">Log in</a> |
-            <a href="#" onclick="authContext.logOut(); return false;">Log out</a>
+            <a href="#" onclick="loginButtonPress();">
+                <div id="loginButton" class="nav"> Log in</div>
+            </a>
+            <a href="#" onclick="logoutButtonPress();">
+                <div id="logoutButton" class="nav" style="display:none;"> Log out</div>
+            </a>
         </p>
         <p id="username"></p>
         <pre id="api_response"></pre>
 
         <script type="text/javascript">
             //========= Input Vars ================================
-            var clientId = '57c5c51c-2036-433a-befa-ebefc7f10689'; //Update with your app regirstion's Application ID
-            var replyUri = 'http://localhost:8080'; //Where you will receive the token. 
-            var logoutRedirectUri = 'http://localhost:8080'; //Update if you are hosting your webpage somewhere else
-            var vstsApi = 'https://myaccount.visualstudio.com/_apis/projects?api-version=2.0';//'https://app.vssps.visualstudio.com/_apis/profile/profiles/me?api-version=1.0';//Update if want to access a different vsts API
-            var vstsResourceId = '499b84ac-1321-427f-aa17-267ca6975798'; //Do not change
+            var clientId = 'xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';                                //Update with your app registration's Application ID (step 2.6)
+            var replyUri = 'http://localhost:8080';                                            //Where you will receive the token. (step 2.5)
+            var logoutRedirectUri = 'http://localhost:8080';                                   //Where you return upon signout. Update if you are hosting your webpage somewhere else
+            var vstsApi = 'https://myaccount.visualstudio.com/_apis/projects?api-version=2.0'; //Update if want to access a different vsts API
+            var vstsResourceId = '499b84ac-1321-427f-aa17-267ca6975798';                       //Do not change. Needed to get a VSTS ADAL access token.
             //=====================================================
-            
+
             // Set up ADAL
             var authContext = new AuthenticationContext({
                 clientId: clientId,
                 redirectUri:replyUri,
-                postLogoutRedirectUri: logoutRedirectUri //Where you return upon signout
+                postLogoutRedirectUri: logoutRedirectUri
             });
-            // Make an AJAX request to the VSTS REST API and print the response as JSON.
-            var getCurrentUserInfo = function (access_token) {
-                document.getElementById('api_response').textContent = 'Calling API...';
-                var xhr = new XMLHttpRequest();
-                //API called with ADAL token
-                xhr.open('GET', vstsApi, true);
-                xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        // Parse Successful Response
-                        document.getElementById('api_response').textContent =
-                            JSON.stringify(JSON.parse(xhr.responseText), null, '  ');
-                    } else {
-                        // Handle Error
-                        document.getElementById('api_response').textContent =
-                            'ERROR:\n\n' + xhr.responseText;
-                    }
-                };
-                xhr.send();
-            }
+            
             if (authContext.isCallback(window.location.hash)) {
                 // Handle redirect after token requests
                 authContext.handleWindowCallback();
@@ -84,6 +69,46 @@
                 } else {
                     document.getElementById('username').textContent = 'Not signed in.';
                 }
+            }
+            // Make an AJAX request to the VSTS REST API and print the response as JSON.
+            var getCurrentUserInfo = function (access_token) {
+                document.getElementById('api_response').textContent = 'Calling API...';
+                var xhr = new XMLHttpRequest();
+                //API called with ADAL token
+                xhr.open('GET', vstsApi, true);
+                xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Parse Successful Response
+                        document.getElementById('api_response').textContent =
+                            JSON.stringify(JSON.parse(xhr.responseText), null, '  ');
+                    } else {
+                        // Handle Error
+                        document.getElementById('api_response').textContent =
+                            'ERROR:\n\n' + xhr.responseText;
+                    }
+                };
+                xhr.send();
+            }
+            var loginButtonPress = function() {
+                authContext.login();
+
+                //hide login button
+                var loginButton = document.getElementById('loginButton');
+                loginButton.style.display = 'none';
+                //show logout button
+                var logoutButton =document.getElementById('logoutButton');
+                logoutButton.style.display = 'block';
+            }
+            var logoutButtonPress = function() {
+                authContext.logout();
+
+                //show login button
+                var loginButton = document.getElementById('loginButton');
+                loginButton.style.display = 'block';
+                //hide logouot button
+                var logoutButton =document.getElementById('logoutButton');
+                logoutButton.style.display = 'none';
             }
         </script>
     </body>

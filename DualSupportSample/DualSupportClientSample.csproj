@@ -7,8 +7,8 @@
     <ProjectGuid>{755BC9EF-A095-48DC-BBF6-AF39F8C3363E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ManagedClientConsoleAppSample</RootNamespace>
-    <AssemblyName>ManagedClientConsoleAppSample</AssemblyName>
+    <RootNamespace>DualSupportClientSample</RootNamespace>
+    <AssemblyName>DualSupportClientSample</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ManagedClientConsoleAppSample.Program</StartupObject>
+    <StartupObject>DualSupportClientSample.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.13.8.999, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
