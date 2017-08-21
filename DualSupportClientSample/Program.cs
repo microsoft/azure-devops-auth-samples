@@ -10,7 +10,7 @@ namespace DualSupportClientSample
     class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string vstsOrTfsCollectionUrl = "https://myaccount.visualstudio.com" //change to the URL of your VSTS or TFS account; VSTS: https://*.visualstudio.com TFS: https://*:8080/tfs/defaultcollection" 
+        internal const string vstsOrTfsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS or TFS account; VSTS: https://*.visualstudio.com TFS: https://*:8080/tfs/defaultcollection" 
         //==========================================================================
 
         public static void Main(string[] args)
