@@ -14,3 +14,4 @@ Learn more about [integrating with Team Services](https://www.visualstudio.com/d
 * [Client library sample (using VSSConnection)](./ClientLibraryConsoleAppSample/README.md)
 * [Javascript web app sample (using Azure Active Directory JS Library)](./JavascriptWebAppSample/README.md)
 * [Dual Support (VSTS/TFS) Client Sample (using Azure Active Directory Library and Windows Authentication)](./DualSupportClientSample/README.md)
+* [Non-interactive PAT Generation Sample (using Azure Active Directory Library with a Username Password credential)](./NonInteractivePatGenerationSample/README.md)
