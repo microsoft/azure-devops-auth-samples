@@ -18,6 +18,5 @@ git clone https://github.com/Microsoft/vsts-auth-samples.git
 1. Navigate to the sample in cloned repo `vsts-auth-samples/NonInteractivePatGenerationSample/`
 2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
 3. Open the solution file `NonInteractivePatGenerationSample.sln` in [Visual Studio 2017](https://www.visualstudio.com/downloads/)
-4. Open CS file `Program.cs` and look for the ```[value]``` placeholders.
-5. Replace them with the appropriate values.
+4. Open CS file ```Program.cs``` and look at the first few lines in the ```Main``` method. Replace the username and password with the appropriate values. You will need to get the ```aadApplicationID``` value by [registering your app in AAD](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications).
 6. Build and run the solution, the generate PAT will be output to the console window.

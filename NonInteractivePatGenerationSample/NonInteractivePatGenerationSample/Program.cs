@@ -16,19 +16,16 @@ namespace NonInteractivePatGenerationSample
         // This is the resource ID for the VSTS application - don't change this.
         private const string VstsResourceId = "499b84ac-1321-427f-aa17-267ca6975798";
 
-        // This is the resource for your own application registered in AAD (which needs access to the VSTS application).
-        // 
-        private const string ClientId = "[your AAD application client ID]";
-
         public static void Main(string[] args)
         {
-            var adalCredential = new UserPasswordCredential(
-                "[your AAD username]",
-                "[your AAD password]"
-                );
+            var username = "[your AAD username]"; // This is your AAD username in the form user@domain.com.
+            var password = "[your AAD password]"; // This is your AAD password.
+            var aadApplicationID = "[your AAD application ID]"; // Created when you register an AAD application: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications.
+
+            var adalCredential = new UserPasswordCredential(username, password);
 
             var authenticationContext = new AuthenticationContext("https://login.microsoftonline.com/common");
-            var result = authenticationContext.AcquireTokenAsync(VstsResourceId, ClientId, adalCredential).Result;
+            var result = authenticationContext.AcquireTokenAsync(VstsResourceId, aadApplicationID, adalCredential).Result;
 
             var token = new VssAadToken(result);
             var vstsCredential = new VssAadCredential(token);
