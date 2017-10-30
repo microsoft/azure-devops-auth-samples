@@ -17,12 +17,13 @@ namespace NonInteractivePatGenerationSample
         private const string VstsResourceId = "499b84ac-1321-427f-aa17-267ca6975798";
 
         // This is the resource for your own application registered in AAD (which needs access to the VSTS application).
+        // 
         private const string ClientId = "[your AAD application client ID]";
 
         public static void Main(string[] args)
         {
             var adalCredential = new UserPasswordCredential(
-                "[your AAD username]", // 
+                "[your AAD username]",
                 "[your AAD password]"
                 );
 
