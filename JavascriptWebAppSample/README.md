@@ -25,9 +25,10 @@ git clone https://github.com/Microsoft/vsts-auth-samples.git
 2. On the top bar, click on your account and under the Directory list, choose the Active Directory tenant where you wish to register your application.
 3. On the left hand navigation menu, select `Azure Active Directory`.
 4. Click on `App registrations` and select `New application registration` from the top bar.
-5. Enter a `name` for you application, ex. "Adal JS sample", choose `Web app/API` for `application type`, and enter `http://localhost:8081` for the `Redirect URI`. Finally click `create` at the bottom of the screen.
+5. Enter a `name` for you application, ex. "Adal JS sample", choose `Web app/API` for `application type`, and enter `http://localhost:8081` for the `Sign-on URL`. Finally click `create` at the bottom of the screen.
 6. Save the `Application ID` from your new application registration. You will need it later in this sample.
-7. Grant permissions for VSTS. Click `Required permissions` -> `add` -> `1 Select an API` -> type in and select `Microsoft Visual Studio Team Services` -> check the box for `Delegated Permissions` -> click `Select` -> click `Done` -> click `Grant Permissions` -> click `Yes`.
+7. Grant permissions for VSTS. Click `Settings` -> `Required permissions` -> `add` -> `1 Select an API` -> type in and select `Microsoft Visual Studio Team Services (Microsoft.VisualStudio.Online)` -> check the box for `Delegated Permissions` -> click `Select` -> click `Done` -> click `Grant Permissions` -> click `Yes`.
+8. Click on `Manifest` -> set the value for `oauth2AllowImplicitFlow` to `true` -> click `Save`.
 
 ## Step 3: Run the sample
 
