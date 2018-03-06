@@ -8,7 +8,7 @@ To learn more about OAuth in Visual Studio Team Services, see [Authorize access 
 
 > These instructions assume you will be deploying this sample app to an Azure web site. To learn more and to get started, visit [Get started with Azure Web Sites and ASP.NET](http://azure.microsoft.com/documentation/articles/web-sites-dotnet-get-started).
 
-1. Register an OAuth client app in Visual Studio Team Services (https://app.vssps.visualstudio.com/app/register) 
+1. Register an OAuth client app in Visual Studio Team Services (https://app.vsaex.visualstudio.com/app/register) 
    * The callback URL should be https://yoursite.azurewebsites.net/oauth/callback, where "yoursite" is the name of your Azure web site
 2. Clone this repository
 3. Open the solution (VstsOAuthSample.sln) in Visual Studio 2015 or later
