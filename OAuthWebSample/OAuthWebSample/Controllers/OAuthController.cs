@@ -17,7 +17,6 @@ namespace OAuthSample.Controllers
         {
 
             return View();
-
         }
 
         public ActionResult RequestToken(string code, string status)
@@ -70,7 +69,7 @@ namespace OAuthSample.Controllers
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(
                 ConfigurationManager.AppSettings["TokenUrl"]
-                );
+            );
 
             webRequest.Method = "POST";
             webRequest.ContentLength = postData.Length;
@@ -114,7 +113,7 @@ namespace OAuthSample.Controllers
             UriBuilder uriBuilder = new UriBuilder(ConfigurationManager.AppSettings["AuthUrl"]);
             var queryParams = HttpUtility.ParseQueryString(uriBuilder.Query ?? String.Empty);
 
-            queryParams["client_id"] = ConfigurationManager.AppSettings["AppId"];
+            queryParams["client_id"] = ConfigurationManager.AppSettings["ClientAppId"];
             queryParams["response_type"] = "Assertion";
             queryParams["state"] = "state";
             queryParams["scope"] = ConfigurationManager.AppSettings["Scope"];
@@ -128,20 +127,19 @@ namespace OAuthSample.Controllers
         public string GenerateRequestPostData(string code)
         {
             return string.Format("client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={0}&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion={1}&redirect_uri={2}",
-                HttpUtility.UrlEncode(ConfigurationManager.AppSettings["ClientSecret"]),
+                HttpUtility.UrlEncode(ConfigurationManager.AppSettings["ClientAppSecret"]),
                 HttpUtility.UrlEncode(code),
                 ConfigurationManager.AppSettings["CallbackUrl"]
-                );
+            );
         }
 
         public string GenerateRefreshPostData(string refreshToken)
         {
             return string.Format("client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={0}&grant_type=refresh_token&assertion={1}&redirect_uri={2}",
-                HttpUtility.UrlEncode(ConfigurationManager.AppSettings["ClientSecret"]),
+                HttpUtility.UrlEncode(ConfigurationManager.AppSettings["ClientAppSecret"]),
                 HttpUtility.UrlEncode(refreshToken),
                 ConfigurationManager.AppSettings["CallbackUrl"]
-                );
-
+            );
         }
     }
 }

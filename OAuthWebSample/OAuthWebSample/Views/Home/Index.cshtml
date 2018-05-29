@@ -2,7 +2,7 @@
     ViewBag.Title = "Visual Studio Online OAuth Client Sample";
 
     var missingMsg = "Not set - update web.config";
-    var appIdVal = !String.IsNullOrEmpty(ViewBag.AppId) ? ViewBag.AppId : missingMsg;
+    var clientAppIdVal = !String.IsNullOrEmpty(ViewBag.ClientAppId) ? ViewBag.ClientAppId : missingMsg;
     var scopeVal = !String.IsNullOrEmpty(ViewBag.Scope) ? ViewBag.Scope : missingMsg;
     var callbackUrlVal = !String.IsNullOrEmpty(ViewBag.CallbackUrl) ? ViewBag.CallbackUrl : missingMsg;
 }
@@ -12,7 +12,7 @@
 <div class="jumbotron">
     <h1>Visual Studio Online OAuth Client Sample</h1>
     <p class="lead">This app shows how to authorize a user to authorize an app and then to request an access token to access Visual Studio Online on their behalf.</p>
-    <p><a href="/oauth/requesttoken" class="btn btn-primary btn-large"  >Start &raquo;</a></p>
+    <p><a href="/oauth/requesttoken" class="btn btn-primary btn-large"  >Authorize &raquo;</a></p>
 </div>
 
 <div class="row">
@@ -24,7 +24,7 @@
                 <li><a href="https://app.vsaex.visualstudio.com/app/register">Register</a> a client app with Visual Studio Online</li>
                 <li>Update the web.config of this web app and set the App ID, Scope, App Secret, and Callback URL set in the registered app. The callback URL should be https://<i>site</i>/oauth/callback
                     <ul>
-                        <li>App ID: <strong>@appIdVal</strong></li>
+                        <li>App ID: <strong>@clientAppIdVal</strong></li>
                         <li>Scope: <strong>@scopeVal</strong></li>
                         <li>Callback URL: <strong>@callbackUrlVal</strong></li>
                     </ul>
