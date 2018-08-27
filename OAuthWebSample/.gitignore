@@ -6,7 +6,7 @@
 *.user
 *.sln.docstates
 *.sln.ide/
-OAuthSample/Properties/PublishProfiles/
+OAuthWebSample/Properties/PublishProfiles/
 
 # Build results
 
