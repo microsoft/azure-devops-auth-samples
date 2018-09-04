@@ -1,8 +1,8 @@
-# ASP.NET web app (VSTS OAuth sample)
+# ASP.NET web app (Azure DevOps OAuth sample)
 
-This sample shows how to prompt a user to authorize a cloud service that can call APIs on Visual Studio Team Services on behalf of the user.
+This sample shows how to prompt a user to authorize a cloud service that can call APIs on Azure DevOps on behalf of the user.
 
-To learn more about OAuth in Visual Studio Team Services, see [Authorize access to VSTS with OAuth 2.0](https://docs.microsoft.com/vsts/integrate/get-started/authentication/oauth?view=vsts)
+To learn more about OAuth in Visual Studio Team Services, see [Authorize access to Azure DevOps with OAuth 2.0](https://docs.microsoft.com/vsts/integrate/get-started/authentication/oauth?view=vsts)
 
 ## How to setup
 
@@ -15,7 +15,7 @@ To learn more about OAuth in Visual Studio Team Services, see [Authorize access 
 
 3. Update the following settings in web.config to match the values in the app you just registered:
    *  `ClientAppID`
-   *  `ClientAppSecret` (use the "Client Secret" shown on the VSTS Application Settings page, not the App Secret)
+   *  `ClientAppSecret` (use the "Client Secret" shown on the Azure DevOps Application Settings page, not the App Secret)
    *  `Scope` (space separated)
    *  `CallbackUrl`
 
@@ -38,7 +38,7 @@ To learn more about OAuth in Visual Studio Team Services, see [Authorize access 
 
 If everything is setup properly, Visual Studio Team Services will issue an access token and refresh token and both values will be displayed. **You should keep these values secret**. Also a new authorization will appear in [your profile page](https://app.vssps.visualstudio.com/Profile/View).
 
-With the access token you can invoke [Visual Studio Team Services REST APIs](https://www.visualstudio.com/docs/integrate/api/overview) by providing the access token in the Authorization header.
+With the access token you can invoke [Azure DevOps REST APIs](https://docs.microsoft.com/en-us/rest/api/vsts/?view=vsts-rest-4.1&viewFallbackFrom=vsts) by providing the access token in the Authorization header.
 
 ```
 Authorization: Bearer {access token}
