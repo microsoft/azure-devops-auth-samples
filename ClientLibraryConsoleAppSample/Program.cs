@@ -11,7 +11,7 @@ namespace ClientLibraryConsoleAppSample
     class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
+        internal const string vstsCollectionUrl = "https://guidedultrasonics.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
         // internal const string vstsCollectioUrl = "http://myserver:8080/tfs/DefaultCollection" alternate URL for a TFS collection
         //==========================================================================
 
