@@ -1,10 +1,9 @@
-﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using System;
+﻿using System;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Microsoft.VisualStudio.Services.Client;
-using Microsoft.VisualStudio.Services.WebApi;
+
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace ManagedClientConsoleAppSample
 {
