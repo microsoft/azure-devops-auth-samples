@@ -1,13 +1,10 @@
-﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿using System;
+
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.VisualStudio.Services.Client;
 using Microsoft.VisualStudio.Services.DelegatedAuthorization;
 using Microsoft.VisualStudio.Services.DelegatedAuthorization.Client;
 using Microsoft.VisualStudio.Services.WebApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NonInteractivePatGenerationSample
 {
