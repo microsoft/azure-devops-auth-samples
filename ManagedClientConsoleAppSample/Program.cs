@@ -23,16 +23,16 @@ namespace ManagedClientConsoleAppSample
             AuthenticationContext ctx = GetAuthenticationContext(null);
             AuthenticationResult result = null;
 
+            IPlatformParameters promptBehavior = new PlatformParameters();
 #if NET452
-            IPlatformParameters p = new PlatformParameters(PromptBehavior.Always);
-#else
-            IPlatformParameters p = new PlatformParameters();
+            promptBehavior = new PlatformParameters(PromptBehavior.Always);
 #endif
+    
             try
             {
 
                 //PromptBehavior.RefreshSession will enforce an authn prompt every time. NOTE: Auto will take your windows login state if possible
-                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), p).Result;
+                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
@@ -41,7 +41,7 @@ namespace ManagedClientConsoleAppSample
             catch (UnauthorizedAccessException)
             {
                 // If the token has expired, prompt the user with a login prompt
-                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), p).Result;
+                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
             }
             catch (Exception ex)
             {
