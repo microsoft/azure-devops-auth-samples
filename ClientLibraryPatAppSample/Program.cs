@@ -13,7 +13,7 @@ namespace ClientLibraryConsoleAppSample
         //============= Config [Edit these with your settings] =====================
         internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
         // internal const string vstsCollectioUrl = "http://myserver:8080/tfs/DefaultCollection" alternate URL for a TFS collection
-        internal const string pat = "";  // change to the generated value
+        internal const string pat = "PAT_GOES_HERE";  // change to the generated value
         //==========================================================================
 
         //Console application to execute a user defined work item query
