@@ -22,10 +22,17 @@ namespace ManagedClientConsoleAppSample
         {
             AuthenticationContext ctx = GetAuthenticationContext(null);
             AuthenticationResult result = null;
+
+            IPlatformParameters promptBehavior = new PlatformParameters();
+#if NET452
+            promptBehavior = new PlatformParameters(PromptBehavior.Always);
+#endif
+    
             try
             {
+
                 //PromptBehavior.RefreshSession will enforce an authn prompt every time. NOTE: Auto will take your windows login state if possible
-                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), new PlatformParameters(PromptBehavior.Always)).Result;
+                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
@@ -34,7 +41,7 @@ namespace ManagedClientConsoleAppSample
             catch (UnauthorizedAccessException)
             {
                 // If the token has expired, prompt the user with a login prompt
-                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), new PlatformParameters(PromptBehavior.Always)).Result;
+                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
             }
             catch (Exception ex)
             {
@@ -67,7 +74,7 @@ namespace ManagedClientConsoleAppSample
             {
                 client.BaseAddress = new Uri(vstsCollectionUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("User-Agent", "ManagedClientConsoleAppSample");
                 client.DefaultRequestHeaders.Add("X-TFS-FedAuthRedirect", "Suppress");
                 client.DefaultRequestHeaders.Authorization = authHeader;
@@ -79,7 +86,8 @@ namespace ManagedClientConsoleAppSample
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("\tSuccesful REST call");
-                    Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    Console.WriteLine(result);
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
