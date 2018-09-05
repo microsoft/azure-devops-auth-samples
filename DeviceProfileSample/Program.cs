@@ -9,7 +9,7 @@ namespace DeviceProfileSample
     public class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string vstsCollectionUrl = "https://guidedultrasonics.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
+        internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
         internal const string clientId = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1";        //update this with your Application ID from step 2.6 (do not change this if you have an MSA backed account)
         //==========================================================================
 
