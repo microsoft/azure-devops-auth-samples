@@ -11,7 +11,7 @@ namespace ManagedClientConsoleAppSample
     class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string vstsCollectionUrl = "https://guidedultrasonics.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
+        internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
         internal const string clientId = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1";          //change to your app registration's Application ID, unless you are an MSA backed account
         internal const string replyUri = "urn:ietf:wg:oauth:2.0:oob";                     //change to your app registration's reply URI, unless you are an MSA backed account
         //==========================================================================
