@@ -1,0 +1,68 @@
+﻿@model TokenViewModel
+@{
+    ViewData["Title"] = "Token Details";
+}
+
+<style>
+
+    input[type=text], textarea {
+        font-family: monospace;
+        margin-bottom: 20px;
+        max-width: 660px;
+    }
+
+    #expiration {
+        max-width: 6em;
+    }
+
+</style>
+
+<h2>Token details</h2>
+
+@if (!String.IsNullOrEmpty(Model.Error))
+{
+    <p>@Model.Error</p>
+}
+else
+{
+    <script>
+
+        var expiration = @Model.Token.ExpiresIn;
+
+        var startTime = Math.floor(Date.now() / 1000);
+        var timer = window.setInterval(updateExpiration, 1000);
+        function updateExpiration() {
+             var val = Math.max(0, expiration - (Math.floor(Date.now() / 1000) - startTime));
+             document.getElementById("expiration").value = val;
+
+             if (val == 0) {
+                 window.clearInterval(timer);
+             }
+        }
+
+        function selectAll(e)
+        {
+            e.focus();
+            e.select();
+        }
+
+    </script>
+
+    <form method="post" action="@Url.Action("RefreshToken", "OAuth")">
+
+        <p>Access token:</p>
+        <textarea rows="6" cols="80" onfocus="selectAll(this)" onclick="selectAll(this)" readonly="readonly" >@Model.Token.AccessToken</textarea>
+
+        <p>Refresh token:</p>
+        <textarea rows="6" cols="80" name="refreshToken" onfocus="selectAll(this)" onclick="selectAll(this)" readonly="readonly">@Model.Token.RefreshToken</textarea>
+
+        <p>Expiration (seconds):</p>
+        <input type="text" id="expiration" value="@Model.Token.ExpiresIn" readonly />
+
+        <p><input type="submit" value="Refresh Token" /></p>
+
+    </form>
+}
+
+<p><a target="_blank" href="@Model.OAuthSettings.ProfileUrl")">View profile</a></p>
+<p><a href="@Url.Action("Index", "Home")">Return to start</a></p>
