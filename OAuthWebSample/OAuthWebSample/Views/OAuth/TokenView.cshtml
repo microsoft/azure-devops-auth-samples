@@ -25,7 +25,7 @@
 else
 {
     <script>
-        var expiration = @ViewBag.Token.expiresIn;
+        var expiration = @ViewBag.Token.ExpiresIn;
 
         var startTime = Math.floor(Date.now() / 1000);
         var timer = window.setInterval(updateExpiration, 1000);
@@ -46,20 +46,21 @@ else
 
     </script>
 
-    <form method="post" action="/oauth/refreshtoken">
+    <form method="post" action="@Url.Action("RefreshToken", "OAuth")">
 
         <p>Access token:</p>
-        <textarea rows="6" cols="80" onfocus="selectAll(this)" onclick="selectAll(this)" readonly="readonly" >@ViewBag.Token.accessToken</textarea>
+        <textarea rows="6" cols="80" onfocus="selectAll(this)" onclick="selectAll(this)" readonly="readonly" >@ViewBag.Token.AccessToken</textarea>
 
         <p>Refresh token:</p>
-        <textarea rows="6" cols="80" name="refreshToken" onfocus="selectAll(this)" onclick="selectAll(this)" readonly="readonly">@ViewBag.Token.refreshToken</textarea>
+        <textarea rows="6" cols="80" name="refreshToken" onfocus="selectAll(this)" onclick="selectAll(this)" readonly="readonly">@ViewBag.Token.RefreshToken</textarea>
 
         <p>Expiration (seconds):</p>
-        <input type="text" id="expiration" value="@ViewBag.Token.expiresIn" readonly />
+        <input type="text" id="expiration" value="@ViewBag.Token.ExpiresIn" readonly />
 
         <p><input type="submit" value="Refresh Token" /></p>
 
     </form>
 }
 
-<p><a href="/">Return to start</a></p>
+<p><a target="_blank" href="@ViewBag.ProfileUrl")">View profile</a></p>
+<p><a href="@Url.Action("Index", "Home")">Return to start</a></p>
