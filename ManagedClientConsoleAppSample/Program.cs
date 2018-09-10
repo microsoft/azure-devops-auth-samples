@@ -23,14 +23,10 @@ namespace ManagedClientConsoleAppSample
             AuthenticationContext ctx = GetAuthenticationContext(null);
             AuthenticationResult result = null;
 
-            IPlatformParameters promptBehavior = new PlatformParameters();
-#if NET452
-            promptBehavior = new PlatformParameters(PromptBehavior.Always);
-#endif
+            IPlatformParameters promptBehavior = new PlatformParameters(PromptBehavior.Always);
     
             try
             {
-
                 //PromptBehavior.RefreshSession will enforce an authn prompt every time. NOTE: Auto will take your windows login state if possible
                 result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
