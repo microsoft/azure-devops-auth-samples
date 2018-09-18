@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>VSTS Autentication ADAL.JS Sample</title>
+        <title>Azure DevOps Autentication ADAL.JS Sample</title>
         <meta charset="utf-8" />
         <style type="text/css">body { font-family: Tahoma; padding: 3em; } </style>
         <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.11/js/adal.min.js"></script>
     </head>
     <body>
         <p>
-            VSTS Authentication - ADAL.JS Sample
+            Azure DevOps Authentication - ADAL.JS Sample
         </p>
         <p>
             <a href="#" onclick="loginButtonPress();">
@@ -26,8 +26,8 @@
             var clientId = 'xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';                                //Update with your app registration's Application ID (step 2.6)
             var replyUri = 'http://localhost:8081';                                            //Where you will receive the token. (step 2.5)
             var logoutRedirectUri = 'http://localhost:8081';                                   //Where you return upon signout. Update if you are hosting your webpage somewhere else
-            var vstsApi = 'https://myaccount.visualstudio.com/_apis/projects?api-version=2.0'; //Update if want to access a different vsts API
-            var vstsResourceId = '499b84ac-1321-427f-aa17-267ca6975798';                       //Do not change. Needed to get a VSTS ADAL access token.
+            var azDevApi = 'https://dev.azure.com/myaccount/_apis/projects?api-version=2.0'; //Update if want to access a different vsts API
+            var azDevApId = '499b84ac-1321-427f-aa17-267ca6975798';                       //Do not change. Needed to get a VSTS ADAL access token.
             //=====================================================
 
             // Set up ADAL
