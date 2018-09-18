@@ -20,6 +20,6 @@ git clone https://github.com/Microsoft/vsts-auth-samples.git
 3. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
 4. Open the solution file `ClientLibraryPatAppSample.csproj` in [Visual Studio 2017](https://www.visualstudio.com/downloads/)
 5. Open CS file `Program.cs` and there is a section with input values to change at the top of the class:
-    * `azDevOrganizationUrl` - Mutable value. This is the url to your VSTS/TFS collection, e.g. http://dev.azure.com/myaccount for Azure DevOps or http://myserver:8080/tfs/DefaultCollection for TFS.
+    * `azDevOrganizationUrl` - Mutable value. This is the url to your Azure DevOps/TFS organization/collection, e.g. http://dev.azure.com/myaccount for Azure DevOps or http://myserver:8080/tfs/DefaultCollection for TFS.
     * `pat` - Mutable value. This is the value you generated in step 1.
 6. Build and run solution. After running you should see a list of the IDs all work items which match your query restrictions.
