@@ -27,7 +27,7 @@
             var replyUri = 'http://localhost:8081';                                            //Where you will receive the token. (step 2.5)
             var logoutRedirectUri = 'http://localhost:8081';                                   //Where you return upon signout. Update if you are hosting your webpage somewhere else
             var azDevApi = 'https://dev.azure.com/myaccount/_apis/projects?api-version=2.0'; //Update if want to access a different vsts API
-            var azDevApId = '499b84ac-1321-427f-aa17-267ca6975798';                       //Do not change. Needed to get a VSTS ADAL access token.
+            var azDevApId = '499b84ac-1321-427f-aa17-267ca6975798';                       //Do not change. Needed to get a Azure DevOps ADAL access token.
             //=====================================================
 
             // Set up ADAL
@@ -55,7 +55,7 @@
                     
                     // Get an access token to VSTS
                     authContext.acquireToken(
-                        vstsResourceId,
+                        azDevResourceId,
                         function (error, token) {
                             if (error || !token) {
                                 document.getElementById('api_response').textContent =
