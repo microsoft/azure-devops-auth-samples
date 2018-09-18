@@ -1,8 +1,8 @@
-# ASP.NET web app (VSTS OAuth sample)
+# ASP.NET web app (Azure DevOps OAuth sample)
 
 This sample shows how to prompt a user to authorize a cloud service that can call APIs on Visual Studio Team Services on behalf of the user.
 
-To learn more about OAuth in Visual Studio Team Services, see [Authorize access to VSTS with OAuth 2.0](https://docs.microsoft.com/vsts/integrate/get-started/authentication/oauth?view=vsts)
+To learn more about OAuth in Azure DevOps, see [Authorize access to Azure DevOps with OAuth 2.0](https://docs.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=vsts)
 
 ## How to setup
 
@@ -15,7 +15,7 @@ To learn more about OAuth in Visual Studio Team Services, see [Authorize access 
 
 3. Update the following settings in web.config to match the values in the app you just registered:
    *  `ClientAppID`
-   *  `ClientAppSecret` (use the "Client Secret" shown on the VSTS Application Settings page, not the App Secret)
+   *  `ClientAppSecret` (use the "Client Secret" shown on the Azure DevOps Application Settings page, not the App Secret)
    *  `Scope` (space separated)
    *  `CallbackUrl`
 
@@ -32,11 +32,11 @@ To learn more about OAuth in Visual Studio Team Services, see [Authorize access 
 
 3. Click **Authorize**
 
-4. Sign in to Visual Studio Team Services (if prompted)
+4. Sign in to Azure DevOps (if prompted)
 
 5. Review and accept the authorization request
 
-If everything is setup properly, Visual Studio Team Services will issue an access token and refresh token and both values will be displayed. **You should keep these values secret**. Also a new authorization will appear in [your profile page](https://app.vssps.visualstudio.com/Profile/View).
+If everything is setup properly, Azure DevOps will issue an access token and refresh token and both values will be displayed. **You should keep these values secret**. Also a new authorization will appear in [your profile page](https://app.vssps.visualstudio.com/Profile/View).
 
 With the access token you can invoke [Visual Studio Team Services REST APIs](https://www.visualstudio.com/docs/integrate/api/overview) by providing the access token in the Authorization header.
 
