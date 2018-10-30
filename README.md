@@ -1,10 +1,10 @@
-# Auth samples for Team Services
+# Auth samples for Azure DevOps Services
 
 ![status](https://mseng.visualstudio.com/_apis/public/build/definitions/b924d696-3eae-4116-8443-9a18392d8544/5326/badge)
 
-Samples that show how to auth with Visual Studio Team Services and Team Foundation Server.
+Samples that show how to auth with Azure DevOps Services and Azure DevOps Server.
 
-Learn more about [integrating with Team Services](https://www.visualstudio.com/docs/integrate/extensions/overview) and [specific authentication guidence](https://www.visualstudio.com/en-us/docs/integrate/get-started/authentication/authentication_guidance)
+Learn more about [integrating with Azure DevOps Services](https://www.visualstudio.com/docs/integrate/extensions/overview) and [specific authentication guidence](https://www.visualstudio.com/en-us/docs/integrate/get-started/authentication/authentication_guidance)
 
 ## Samples
 
