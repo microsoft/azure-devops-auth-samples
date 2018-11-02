@@ -4,7 +4,7 @@
 
 Samples that show how to auth with Azure DevOps Services and Azure DevOps Server.
 
-Learn more about [integrating with Azure DevOps Services](https://www.visualstudio.com/docs/integrate/extensions/overview) and [specific authentication guidence](https://www.visualstudio.com/en-us/docs/integrate/get-started/authentication/authentication_guidance)
+Learn more about [integrating with Azure DevOps Services](https://docs.microsoft.com/azure/devops/integrate/index?view=vsts) and [specific authentication guidence](https://docs.microsoft.com/azure/devops/integrate/get-started/authentication/authentication-guidance?view=vsts)
 
 ## Samples
 
