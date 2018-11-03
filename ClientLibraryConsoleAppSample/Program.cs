@@ -11,7 +11,7 @@ namespace ClientLibraryConsoleAppSample
     class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string azDevOrganizationUrl = "https://dev.azure.com/myaccount"; //change to the URL of your Azure DevOps account; NOTE: This must use HTTPS
+        internal const string azureDevOpsOrganizationUrl = "https://dev.azure.com/organization"; //change to the URL of your Azure DevOps account; NOTE: This must use HTTPS
         // internal const string vstsCollectioUrl = "http://myserver:8080/tfs/DefaultCollection" alternate URL for a TFS collection
         //==========================================================================
 
@@ -19,7 +19,7 @@ namespace ClientLibraryConsoleAppSample
         static void Main(string[] args)
         {
             //Prompt user for credential
-            VssConnection connection = new VssConnection(new Uri(azDevOrganizationUrl), new VssClientCredentials());
+            VssConnection connection = new VssConnection(new Uri(azureDevOpsOrganizationUrl), new VssClientCredentials());
 
             //create http client and query for resutls
             WorkItemTrackingHttpClient witClient = connection.GetClient<WorkItemTrackingHttpClient>();
