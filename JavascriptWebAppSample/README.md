@@ -37,10 +37,10 @@ git clone https://github.com/Microsoft/vsts-auth-samples.git
     * `clientId` - (Required) update this with the `application id` you saved from step 2.6 above
     * `replyUri` - (optional)  In single page apps this should be the app URL itself. We have set this to `http://localhost:8081`(where we will host our app), but if you are hosting your app at another URL please change this value and the reply URI in `portal.azure.com`
     * `logoutredirectUri` - (optional) update if you are hosting your app at a location other than `http://localhost:8081`
-    * `azDevApi` - (Required) update this with your Azure DevOps/TFS collection, e.g. http://dev.azure.com/myaccount/DefaultCollection/_apis/projects?api-version=2.0 for Azure DevOps or http://myserver:8080/tfs/DefaultCollection/_apis/projects?api-version=2.0 for TFS. If you would like to the sample to run a different Azure DevOps API please change the entire string. [Learn more about other Azure DevOps REST API's](https://docs.microsoft.com/en-us/rest/api/vsts/?view=vsts-rest-4.1&viewFallbackFrom=vsts)
-    * `azDevResourceId` - Do not change this value. It is used to receive Azure DevOps ADAL authentication tokens
+    * `azureDevOpsApi` - (Required) update this with your Azure DevOps/TFS collection, e.g. http://dev.azure.com/organization/_apis/projects?api-version=4.0 for Azure DevOps or http://myserver:8080/tfs/DefaultCollection/_apis/projects?api-version=4.0 for TFS. If you would like the sample to run a different Azure DevOps API please change the entire string. [Learn more about other Azure DevOps REST API's](https://docs.microsoft.com/en-us/rest/api/vsts/?view=vsts-rest-4.1&viewFallbackFrom=vsts)
+    * `azureDevOpsResourceId` - Do not change this value. It is used to receive Azure DevOps ADAL authentication tokens
 3. Navigate to the ADAL JS sample in cloned repo `vsts-auth-samples/JavascriptWebAppSample/` and start your http-server and set it to serve pages at `localhost:8081` which will by default serve `index.html` at `http://localhost:8081`.
-4. Navigate to `http://localhost:8081`. Sign in with a user account from your AAD tenant which has access to the VSTS account specified in the `azDevApi`. All projects contained in the account should be displayed.
+4. Navigate to `http://localhost:8081`. Sign in with a user account from your AAD tenant which has access to the VSTS account specified in the `azureDevOpsApi`. All projects contained in the account should be displayed.
 
 
 
