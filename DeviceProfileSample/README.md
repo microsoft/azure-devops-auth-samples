@@ -47,7 +47,7 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 2. Open the solution file `DeviceProfileSample.sln` in [Visual Studio 2017](https://www.visualstudio.com/downloads/)
 3. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
 4. Open CS file `Program.cs` and there is a section with input values to change at the top of the class:
-    * `azDevOrganizationUrl` - Update this value to your VSTS collection URL, e.g. http://dev.azure.com/myaccount.
+    * `azureDevOpsOrganizationUrl` - Update this value to your VSTS collection URL, e.g. http://dev.azure.com/organization.
     * `clientId` - Update this value with the `Application ID` you saved in step 2.6.
 5. Build and run solution. You should see a console window with instructions on how to authenticate via the Device Profile flow. After authenticating you should see all team project information viewable by the authenticated identity displayed in the console window.
 
@@ -57,5 +57,5 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 2. Open the solution file `DeviceProfileSample.sln` in [Visual Studio 2017](https://www.visualstudio.com/downloads/)
 3. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
 4. Open CS file `Program.cs` and there is a section with input values to change at the top of the class:
-    * `azDevOrganizationUrl` - Update this value to your VSTS collection URL, e.g. http://dev.azure.com/myaccount.
+    * `azureDevOpsOrganizationUrl` - Update this value to your VSTS collection URL, e.g. http://dev.azure.com/organization.
 5. Build and run solution. You should see a console window with instructions on how to authenticate via the Device Profile flow. After authenticating you should see all team project information viewable by the authenticated identity displayed in the console window.
