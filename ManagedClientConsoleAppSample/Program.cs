@@ -11,12 +11,12 @@ namespace ManagedClientConsoleAppSample
     class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string azDevOrganizationUrl = "http://dev.azure.com/myaccount"; //change to the URL of your Azure DevOps account; NOTE: This must use HTTPS
+        internal const string azureDevOpsOrganizationUrl = "http://dev.azure.com/organization"; //change to the URL of your Azure DevOps account; NOTE: This must use HTTPS
         internal const string clientId = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1";          //change to your app registration's Application ID, unless you are an MSA backed account
         internal const string replyUri = "urn:ietf:wg:oauth:2.0:oob";                     //change to your app registration's reply URI, unless you are an MSA backed account
         //==========================================================================
 
-        internal const string azDevResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Constant value to target Azure DevOps. Do not change  
+        internal const string azureDevOpsResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Constant value to target Azure DevOps. Do not change  
 
         public static void Main(string[] args)
         {
