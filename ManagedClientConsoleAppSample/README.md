@@ -50,7 +50,7 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 2. Open the solution file `ManagedClientConsoleAppSample.sln` in [Visual Studio 2017](https://www.visualstudio.com/downloads/).
 3. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed.
 4. Open CS file `Program.cs` and there is a section with input values to change at the top of the class:
-    * `azDevOrganizationUrl` - update this with the url to your Azure DevOps/TFS collection, e.g. http://dev.azure.com/myaccount for Azure DevOps.
+    * `azureDevOpsOrganizationUrl` - update this with the url to your Azure DevOps/TFS collection, e.g. http://dev.azure.com/organization for Azure DevOps.
     * `clientId` - update this with the `application id` you saved from step 2.6 above.
     * `replyUri` - update this to `http://adalsample`, you can add other reply urls in [azure portal](https://portal.azure.com)
 5. Build and run the solution. After running you should see an interactive login prompt. Then after authentication and authorization, a list of all projects inside of your account.
@@ -61,7 +61,7 @@ Package: `Microsoft.Identity.Model.Clients.ActiveDirectory` has already been ins
 2. Open the solution file `ManagedClientConsoleAppSample.sln` in [Visual Studio 2017](https://www.visualstudio.com/downloads/).
 3. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed.
 4. Open CS file `Program.cs` and there is a section with input values to change at the top of the class:
-    * `azDevOrganizationUrl` - update this with the url to your Azure DevOps/TFS collection, e.g. http://dev.azure.com/myaccount for Azure DevOps.
+    * `azureDevOpsOrganizationUrl` - update this with the url to your Azure DevOps/TFS collection, e.g. http://dev.azure.com/organization for Azure DevOps.
     * `clientId` - Do not change this value. It must be used to run the sample successfully.
     * `replyUri` - Do not change this value. It must be used to run the sample successfully.
 5. Build and run the solution. After running you should see an interactive login prompt. Then after authentication and authorization, a list of all projects inside of your account.
