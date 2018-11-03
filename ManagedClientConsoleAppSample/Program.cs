@@ -32,7 +32,7 @@ namespace ManagedClientConsoleAppSample
             {
 
                 //PromptBehavior.RefreshSession will enforce an authn prompt every time. NOTE: Auto will take your windows login state if possible
-                result = ctx.AcquireTokenAsync(azDevResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
+                result = ctx.AcquireTokenAsync(azureDevOpsResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
@@ -41,7 +41,7 @@ namespace ManagedClientConsoleAppSample
             catch (UnauthorizedAccessException)
             {
                 // If the token has expired, prompt the user with a login prompt
-                result = ctx.AcquireTokenAsync(azDevResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
+                result = ctx.AcquireTokenAsync(azureDevOpsResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace ManagedClientConsoleAppSample
             // use the httpclient
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(vstsCollectionUrl);
+                client.BaseAddress = new Uri(azureDevOpsOrganizationUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("User-Agent", "ManagedClientConsoleAppSample");
