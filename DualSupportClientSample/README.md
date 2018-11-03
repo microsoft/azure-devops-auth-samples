@@ -8,7 +8,7 @@ This buildable sample will walk you through the steps to create a client-side co
 
 To run this sample you will need:
 * [Visual Studio IDE](https://www.visualstudio.com/vs/)
-* A [Azure DevOps account](https://www.visualstudio.com/team-services/)
+* A [Azure DevOps organization](https://dev.azure.com/)
 
 ## Step 1: Clone or download vsts-auth-samples repository
 
