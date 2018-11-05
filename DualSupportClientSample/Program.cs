@@ -10,7 +10,7 @@ namespace DualSupportClientSample
     class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string vstsOrTfsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS or TFS account; VSTS: https://*.visualstudio.com TFS: https://*:8080/tfs/defaultcollection" 
+        internal const string azureDevOpsOrganizationUrl = "https://dev.azure.com/organization"; //change to the URL of your Azure DevOps or TFS account; Azure DevOps: https://dev.azure.com/organization TFS: https://*:8080/tfs/defaultcollection" 
         //==========================================================================
 
         public static void Main(string[] args)
@@ -18,7 +18,7 @@ namespace DualSupportClientSample
             try
             {
                 //Based on collection URL will either start an interactive login session or use local Windows credential authentication
-                VssConnection connection = new VssConnection(new Uri(vstsOrTfsCollectionUrl), new VssClientCredentials());
+                VssConnection connection = new VssConnection(new Uri(azureDevOpsOrganizationUrl), new VssClientCredentials());
 
                 ProjectHttpClient projectClient = connection.GetClient<ProjectHttpClient>();
                 IEnumerable<TeamProjectReference> projects = projectClient.GetProjects().Result;

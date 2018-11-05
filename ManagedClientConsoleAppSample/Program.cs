@@ -11,12 +11,12 @@ namespace ManagedClientConsoleAppSample
     class Program
     {
         //============= Config [Edit these with your settings] =====================
-        internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
+        internal const string azureDevOpsOrganizationUrl = "http://dev.azure.com/organization"; //change to the URL of your Azure DevOps account; NOTE: This must use HTTPS
         internal const string clientId = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1";          //change to your app registration's Application ID, unless you are an MSA backed account
         internal const string replyUri = "urn:ietf:wg:oauth:2.0:oob";                     //change to your app registration's reply URI, unless you are an MSA backed account
         //==========================================================================
 
-        internal const string VSTSResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Constant value to target VSTS. Do not change  
+        internal const string azureDevOpsResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Constant value to target Azure DevOps. Do not change  
 
         public static void Main(string[] args)
         {
@@ -32,7 +32,7 @@ namespace ManagedClientConsoleAppSample
             {
 
                 //PromptBehavior.RefreshSession will enforce an authn prompt every time. NOTE: Auto will take your windows login state if possible
-                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
+                result = ctx.AcquireTokenAsync(azureDevOpsResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
                 Console.WriteLine("Token expires on: " + result.ExpiresOn);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
@@ -41,7 +41,7 @@ namespace ManagedClientConsoleAppSample
             catch (UnauthorizedAccessException)
             {
                 // If the token has expired, prompt the user with a login prompt
-                result = ctx.AcquireTokenAsync(VSTSResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
+                result = ctx.AcquireTokenAsync(azureDevOpsResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace ManagedClientConsoleAppSample
             // use the httpclient
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(vstsCollectionUrl);
+                client.BaseAddress = new Uri(azureDevOpsOrganizationUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("User-Agent", "ManagedClientConsoleAppSample");
