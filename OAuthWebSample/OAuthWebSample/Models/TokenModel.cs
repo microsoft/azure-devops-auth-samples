@@ -1,28 +1,23 @@
 ﻿using System;
-using Newtonsoft.Json;
-
+using System.Runtime.Serialization;
 
 namespace OAuthSample.Models
 {
+    [DataContract]
     public class TokenModel
-    {
-        public TokenModel()
-        {
+    {    
+        [DataMember(Name = "access_token")]
+        public String AccessToken { get; set; }
 
-        }
+        [DataMember(Name = "token_type")]
+        public String TokenType { get; set; }
 
-        [JsonProperty(PropertyName = "access_token")]
-        public String accessToken { get; set; }
+        [DataMember(Name = "refresh_token")]
+        public String RefreshToken { get; set; }
 
-        [JsonProperty(PropertyName = "token_type")]
-        public String tokenType { get; set; }
+        [DataMember(Name = "expires_in")]
+        public int ExpiresIn { get; set; }
 
-        [JsonProperty(PropertyName = "expires_in")]
-        public String expiresIn { get; set; }
-
-        [JsonProperty(PropertyName = "refresh_token")]
-        public String refreshToken { get; set; }
-
+        public bool IsPending { get; set; }
     }
-
 }

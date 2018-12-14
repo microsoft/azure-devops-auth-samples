@@ -2,13 +2,14 @@
 
 This sample shows how to prompt a user to authorize a cloud service that can call APIs on Azure DevOps on behalf of the user.
 
-To learn more about OAuth in Visual Studio Team Services, see [Authorize access to Azure DevOps with OAuth 2.0](https://docs.microsoft.com/vsts/integrate/get-started/authentication/oauth?view=vsts)
+To learn more about OAuth in Azure DevOps, see [Authorize access to Azure DevOps with OAuth 2.0](https://docs.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=vsts)
+
 
 ## How to setup
 
 > These instructions assume you will be deploying this sample app to an Azure web app. To learn more and to get started, visit [Get started with Azure Web Apps and ASP.NET](https://docs.microsoft.com/azure/app-service/app-service-web-get-started-dotnet-framework).
 
-1. Register an OAuth client app in Visual Studio Team Services (https://app.vsaex.visualstudio.com/app/register) 
+1. Register an OAuth client app in Azure DevOps (https://app.vsaex.visualstudio.com/app/register) 
    * The callback URL should be https://yoursite.azurewebsites.net/oauth/callback, where `yoursite` is the name of your Azure web app
 
 2. Clone this repository and open the solution `OAuthWebSample\OAuthWebSample.sln` in Visual Studio 2015 or later
@@ -32,13 +33,14 @@ To learn more about OAuth in Visual Studio Team Services, see [Authorize access 
 
 3. Click **Authorize**
 
-4. Sign in to Visual Studio Team Services (if prompted)
+4. Sign in to Azure DevOps (if prompted)
 
 5. Review and accept the authorization request
 
-If everything is setup properly, Visual Studio Team Services will issue an access token and refresh token and both values will be displayed. **You should keep these values secret**. Also a new authorization will appear in [your profile page](https://app.vssps.visualstudio.com/Profile/View).
+If everything is setup properly, Azure DevOps will issue an access token and refresh token and both values will be displayed. **You should keep these values secret**. Also a new authorization will appear in [your profile page](https://app.vssps.visualstudio.com/Profile/View).
 
-With the access token you can invoke [Azure DevOps REST APIs](https://docs.microsoft.com/en-us/rest/api/vsts/?view=vsts-rest-4.1&viewFallbackFrom=vsts) by providing the access token in the Authorization header.
+
+With the access token you can invoke [Azure DevOps REST APIs](https://docs.microsoft.com/en-us/rest/api/vsts/?view=vsts-rest-4.1) by providing the access token in the Authorization header.
 
 ```
 Authorization: Bearer {access token}
