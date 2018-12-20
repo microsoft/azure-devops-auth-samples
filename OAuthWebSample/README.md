@@ -4,6 +4,7 @@ This sample shows how to prompt a user to authorize a cloud service that can cal
 
 To learn more about OAuth in Azure DevOps, see [Authorize access to Azure DevOps with OAuth 2.0](https://docs.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=vsts)
 
+
 ## How to setup
 
 > These instructions assume you will be deploying this sample app to an Azure web app. To learn more and to get started, visit [Get started with Azure Web Apps and ASP.NET](https://docs.microsoft.com/azure/app-service/app-service-web-get-started-dotnet-framework).
@@ -37,6 +38,7 @@ To learn more about OAuth in Azure DevOps, see [Authorize access to Azure DevOps
 5. Review and accept the authorization request
 
 If everything is setup properly, Azure DevOps will issue an access token and refresh token and both values will be displayed. **You should keep these values secret**. Also a new authorization will appear in [your profile page](https://app.vssps.visualstudio.com/Profile/View).
+
 
 With the access token you can invoke [Azure DevOps REST APIs](https://docs.microsoft.com/en-us/rest/api/vsts/?view=vsts-rest-4.1) by providing the access token in the Authorization header.
 
