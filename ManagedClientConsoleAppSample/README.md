@@ -35,8 +35,8 @@ If you are a Microsoft Account backed Azure DevOps account please skip this step
 1. Sign in to the [Azure Portal](https://portal.azure.com).
 2. On the top bar, click on your account and under the Directory list, choose the Active Directory tenant where you wish to register your application.
 3. On the left hand navigation menu, select `Azure Active Directory`.
-4. Click on `App registrations` and select `New application registration` from the top bar.
-5. Enter a `name` for you application, ex. "Adal native app sample", choose `InstalledClient` for `application type`, and enter `urn:ietf:wg:oauth:2.0:oob` for the `Redirect URI`. Finally click `create` at the bottom of the screen.
+4. Click on `App registrations` and select `New registration` from the top bar.
+5. Enter a `Name` for you application, ex. "Adal native app sample", choose a Supported account type as required, ex. the first option, then select `Public client (mobile & desktop)` in `Redirect URI` dropdown and enter `urn:ietf:wg:oauth:2.0:oob` as the URI in the text box next to it. Finally click `create` at the bottom of the screen.
 6. Save the `Application ID` from your new application registration. You will need it later in this sample.
 7. Grant permissions for Azure DevOps. Click `Required permissions` -> `add` -> `1 Select an API` -> type in and select `Azure DevOps (Microsoft Visual Studio Team Services)` -> check the box for `Delegated Permissions` -> click `Select` -> click `Done` -> click `Grant Permissions` -> click `Yes`.
 
