@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Antlr" Version="3.4.1.9004" />
-    <PackageReference Include="bootstrap" Version="3.0.0" />
+    <PackageReference Include="bootstrap" Version="3.4.1" />
     <PackageReference Include="jQuery" Version="1.10.2" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNet.Razor" Version="3.0.0" />
