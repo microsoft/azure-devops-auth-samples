@@ -1,8 +1,8 @@
-# Auth samples for Azure DevOps Services
+# Auth samples for Azure DevOps
 
 ![status](https://dev.azure.com/mseng/_apis/public/build/definitions/b924d696-3eae-4116-8443-9a18392d8544/5326/badge)
 
-Samples that show how to authenticate with Azure DevOps and Azure DevOps Server.
+Samples that show how to authenticate with Azure DevOps Services and Azure DevOps Server.
 
 Learn more about [integrating with Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/extend/overview?view=vsts) and [specific authentication guidance](https://docs.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/authentication-guidance?view=vsts)
 
