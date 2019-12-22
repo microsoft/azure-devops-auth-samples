@@ -75,7 +75,7 @@
                 document.getElementById('api_response').textContent = 'Calling API...';
                 var xhr = new XMLHttpRequest();
                 //API called with ADAL token
-                xhr.open('GET', vstsApi, true);
+                xhr.open('GET', azureDevOpsApi, true);
                 xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
