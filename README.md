@@ -11,6 +11,7 @@ Learn more about [integrating with Azure DevOps](https://docs.microsoft.com/en-u
 * [Managed client sample (using Azure Active Directory Library)](./ManagedClientConsoleAppSample/README.md)
 * [Device profile sample (.NET Core)](./DeviceProfileSample/README.md)
 * [ASP.NET Web app OAuth sample](./OAuthWebSample/README.md)
+* [ASP.NET Core Web app OAuth sample](./NetCoreOAuthWebSample/README.md)
 * [Client library sample (using VSSConnection)](./ClientLibraryConsoleAppSample/README.md)
 * [Javascript web app sample (using Azure Active Directory JS Library)](./JavascriptWebAppSample/README.md)
 * [Dual Support (Azure DevOps/TFS) Client Sample (using Azure Active Directory Library and Windows Authentication)](./DualSupportClientSample/README.md)
