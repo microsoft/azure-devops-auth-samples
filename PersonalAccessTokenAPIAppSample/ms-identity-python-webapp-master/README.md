@@ -4,15 +4,14 @@ languages:
 - python
 products:
 - azure-active-directory
-description: "This sample demonstrates a Python web application calling the PAT Lifecycle API on PPE that is secured using Azure Active Directory."
+description: "This sample demonstrates a Python web application calling the PAT lifecycle management API that is secured using Azure Active Directory.  Users can download the sample and fill in their own credentials in 'app_config.py' to try the API themselves."
 urlFragment: ms-identity-python-webapp
 ---
 # Integrating Microsoft Identity Platform with a Python web application
 
 ## About this sample
 
-> This sample is also available as a quickstart for the Microsoft identity platform:
-[Quickstart: Add sign-in with Microsoft to a Python web app]("https://docs.microsoft.com/azure/active-directory/develop/quickstart-v2-python-webapp")
+> This sample can also be created from a Quickstart for the Microsoft identity platform: [Get started with a Python Flask Quickstart application](TODO: add link to new content docs article)
 
 ### Overview
 
@@ -128,7 +127,7 @@ In the steps below, "ClientID" is the same as "Application ID" or "AppId".
    Now you can set the secret in environment variable `CLIENT_SECRET`,
    and then adjust `app_config.py` to pick it up.
 1. Find the app key `Enter_the_Application_Id_here` and replace the existing value with the application ID (clientId) of the `python-webapp` application copied from the Azure portal.
-
+1. Find the ENDPOINT variable and replace `Enter_the_Collection_Name_Here` with the name of your Azure DevOps collection.
 
 ### Step 4: Run the sample
 
@@ -167,6 +166,3 @@ For more information, see MSAL.Python's [conceptual documentation]("https://gith
 For more information about web apps scenarios on the Microsoft identity platform see [Scenario: Web app that calls web APIs](https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-web-app-call-api-overview)
 
 For more information about how OAuth 2.0 protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](http://go.microsoft.com/fwlink/?LinkId=394414).
-
-## TODO
-- Add the rest of the PAT Lifecycle API endpoints
