@@ -1,4 +1,3 @@
-/ms-identity-python-webapp-master/flask_session
-/ms-identity-python-webapp-master/__pycache__
-/ms-identity-python-webapp-master/.vscode
-/flask_session
+flask_session
+__pycache__
+.vscode

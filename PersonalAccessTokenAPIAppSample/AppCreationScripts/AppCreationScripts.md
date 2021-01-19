@@ -4,16 +4,16 @@
 
 ### Quick summary
 
-1. On Windows run PowerShell and navigate to the root of the cloned directory
-1. In PowerShell run:
+1. On Windows run PowerShell and navigate to the root of the PersonalAccessTokenAPIAppSample directory from the cloned repo
+2. In PowerShell run:
    ```PowerShell
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
    ```
-1. Run the script to create your Azure AD application and configure the code of the sample application accordingly. (Other ways of running the scripts are described below)
+3. Run the script to create your Azure AD application and configure the code of the sample application accordingly. (Other ways of running the scripts are described below)
    ```PowerShell
    .\AppCreationScripts\Configure.ps1
    ```
-1. Open the Visual Studio solution and click start
+4. Open the Visual Studio solution and click start
 
 ### More details
 
