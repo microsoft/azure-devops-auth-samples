@@ -11,8 +11,6 @@ urlFragment: ms-identity-python-webapp
 
 ## About this sample
 
-> This sample can also be created from a Quickstart for the Microsoft identity platform: [Get started with a Python Flask Quickstart application](TODO: add link to new content docs article)
-
 ### Overview
 
 This sample demonstrates a Python web application that signs-in users with the Microsoft identity platform and calls the API.
