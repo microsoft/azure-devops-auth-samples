@@ -22,7 +22,7 @@ REDIRECT_PATH = "/getAToken"  # Used for forming an absolute URL to your redirec
                               # in the app's registration in the Azure portal.
 
 
-ENDPOINT = 'https://dev.azure.com/Enter_the_Collection_Name_Here/_apis/Tokens/Pats?api-version=6.1-preview' 
+ENDPOINT = 'https://vssps.dev.azure.com/Enter_the_Collection_Name_Here/_apis/Tokens/Pats?api-version=6.1-preview' 
 # fill in the url to the user's ADO collection name here
 
 SCOPE = ["499b84ac-1321-427f-aa17-267ca6975798/.default"]
