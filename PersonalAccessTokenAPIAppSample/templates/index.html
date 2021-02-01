@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Microsoft Identity Python Web App</h1>
+    <h2>Welcome {{ user.get("name") }}!</h2>
+
+    {% if config.get("ENDPOINT") %}
+      <div class="get-all-pats">
+        <li style="font-weight:bold">Call PAT get all tokens</li>
+        <form action="/pat_get_all">
+          <input type="submit" style="margin-top:1em; margin-right:0.5em; margin-bottom:1em; margin-left:2em"/>
+        </form>
+      </div>
+    {% endif %}
+
+    {% if config.get("ENDPOINT") %}
+      <div class="get-pat">
+        <li style="font-weight:bold">Call PAT get single token by authorization ID</li>
+        <form class="input-form" action="/handle_input" method="POST">
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="get-authid">Authorization id:</label>
+            <input type="text" id="get-authid" name="authid">
+            <input type="hidden" name="route" value="pat_get">
+          </div>
+          <input type="submit" style="margin-top:0.5em; margin-right:0.5em; margin-bottom:1em; margin-left:2em">
+        </form>
+      </div>
+    {% endif %}
+
+    {% if config.get("ENDPOINT") %}
+      <div class="put-pat">
+        <li style="font-weight:bold">Call PAT update token</li>
+        <form class="input-form" action="/handle_input" method="POST">
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="put-authid">Authorization id:</label>
+            <input type="text" id="put-authid" name="authid">
+          </div>
+  
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="put-displayname">Display name:</label>
+            <input type="text" id="put-displayname" name="displayname">
+          </div>
+  
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="put-scope">Scope:</label>
+            <input type="text" id="put-scope" name="scope">
+          </div>
+  
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="put-validto">Valid to:</label>
+            <input type="text" id="put-validto" name="validto">
+          </div>
+  
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="put-allorgs">All orgs?:</label>
+            <input type="text" id="put-allorgs" name="allorgs">
+          </div>
+
+          <input type="hidden" name="route" value="pat_put">
+          <input type="submit" style="margin-top:0.5em; margin-right:0.5em; margin-bottom:1em; margin-left:2em">
+        </form>
+      </div>
+    {% endif %}
+
+    {% if config.get("ENDPOINT") %}
+      <div class="post-pat">
+        <li style="font-weight:bold">Call PAT create token</li>
+        <form class="input-form" action="/handle_input" method="POST">
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="post-displayname">Display name:</label>
+            <input type="text" id="post-displayname" name="displayname">
+          </div>
+  
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="post-scope">Scope:</label>
+            <input type="text" id="post-scope" name="scope">
+          </div>
+  
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="post-validto">Valid to:</label>
+            <input type="text" id="post-validto" name="validto">
+          </div>
+  
+          <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+            <label for="post-allorgs">All orgs?:</label>
+            <input type="text" id="post-allorgs" name="allorgs">
+          </div>
+
+          <input type="hidden" name="route" value="pat_post">
+          <input type="submit" style="margin-top:0.5em; margin-right:0.5em; margin-bottom:1em; margin-left:2em">
+        </form>
+      </div>
+    {% endif %}
+
+    {% if config.get("ENDPOINT") %}
+    <div class="delete-pat">
+      <li style="font-weight:bold">Call PAT delete (revoke) token by authorization ID</li>
+      <form class="input-form" action="/handle_input" method="POST">
+        <div display="inline" style="padding-top:0.5em; padding-right:0.5em; padding-bottom:0.5em; padding-left:2em">
+          <label for="get-authid">Authorization id:</label>
+          <input type="text" id="get-authid" name="authid">
+          <input type="hidden" name="route" value="pat_delete">
+        </div>
+        <input type="submit" style="margin-top:0.5em; margin-right:0.5em; margin-bottom:1em; margin-left:2em">
+      </form>
+    </div>
+    {% endif %}
+
+    {% if config.get("B2C_PROFILE_AUTHORITY") %}
+      <li><a href='{{_build_auth_url(authority=config["B2C_PROFILE_AUTHORITY"])}}'>Edit Profile</a></li>
+    {% endif %}
+
+    <li><a href="/logout">Logout</a></li>
+    <hr>
+    <footer style="text-align: right">Powered by MSAL Python {{ version }}</footer>
+</body>
+</html>
+
