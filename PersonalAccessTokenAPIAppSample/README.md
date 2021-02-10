@@ -120,12 +120,12 @@ In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 > Note: if you used the setup scripts, the changes below may have been applied for you
 
 1. Open the `app_config.py` file
-1. Find the app key `Enter_the_Tenant_Name_Here` and replace the existing value with your Azure AD tenant name.
-1. You saved your application secret during the creation of the `python-webapp` app in the Azure portal.
+2. For a multi-tenant app, find the app key `Enter_the_Tenant_ID_Here` and replace the existing value with your Azure AD tenant ID.  For a single tenant app, use the alternate value for the AUTHORITY variable, adding the specific tenant name in `Enter_the_Tenant_Name_Here`.
+3. You saved your application secret during the creation of the `python-webapp` app in the Azure portal.
    Now you can set the secret in environment variable `CLIENT_SECRET`,
    and then adjust `app_config.py` to pick it up.
-1. Find the app key `Enter_the_Application_Id_here` and replace the existing value with the application ID (clientId) of the `python-webapp` application copied from the Azure portal.
-1. Find the ENDPOINT variable and replace `Enter_the_Collection_Name_Here` with the name of your Azure DevOps collection.
+4. Find the app key `Enter_the_Application_Id_here` and replace the existing value with the application ID (clientId) of the `python-webapp` application copied from the Azure portal.
+5. Find the ENDPOINT variable and replace `Enter_the_Collection_Name_Here` with the name of your Azure DevOps collection.
 
 ### Step 4: Run the sample
 
@@ -138,6 +138,12 @@ Run app.py from shell or command line. Note that the host and port values need t
 
 ```Shell
 $ flask run --host localhost --port 5000
+```
+
+or 
+
+```Shell
+$ python -m flask run
 ```
 
 ## Community Help and Support
