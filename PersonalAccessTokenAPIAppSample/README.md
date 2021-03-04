@@ -40,43 +40,14 @@ To run this sample, you'll need:
 From your shell or command line:
 
 ```Shell
-git clone https://github.com/Azure-Samples/ms-identity-python-webapp.git
+git clone https://github.com/microsoft/azure-devops-auth-samples.git
 ```
 
-or download and extract the repository .zip file.
+or download and extract the repository .zip file.  Make sure you're working in the PersonalAccessTokenApiAppSample directory.
 
 > Given that the name of the sample is quite long, you might want to clone it in a folder close to the root of your hard drive, to avoid file name length limitations when running on Windows.
 
 ### Step 2:  Register the sample application with your Azure Active Directory tenant
-
-There is one project in this sample. To register it, you can:
-
-- either follow the steps [Step 2: Register the sample with your Azure Active Directory tenant](#step-2-register-the-sample-with-your-azure-active-directory-tenant) and [Step 3:  Configure the sample to use your Azure AD tenant](#choose-the-azure-ad-tenant-where-you-want-to-create-your-applications)
-- or use PowerShell scripts that:
-  - **automatically** creates the Azure AD applications and related objects (passwords, permissions, dependencies) for you
-  - modify the applications' configuration files.
-
-If you want to use this automation:
-
-1. On Windows, run PowerShell and navigate to the root of the cloned directory
-1. In PowerShell run:
-
-   ```PowerShell
-   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
-   ```
-
-1. Run the script to create your Azure AD application and configure the code of the sample application accordingly.
-1. In PowerShell run:
-
-   ```PowerShell
-   cd .\AppCreationScripts\
-   .\Configure.ps1
-   cd ..
-   ```
-
-   > Other ways of running the scripts are described in [App Creation Scripts](./AppCreationScripts/AppCreationScripts.md)
-
-If you don't want to use this automation, follow the steps below.
 
 #### Choose the Azure AD tenant where you want to create your applications
 
@@ -107,8 +78,8 @@ As a first step you'll need to:
 1. Select the **API permissions** section
    - Click the **Add a permission** button and then,
    - Ensure that the **Microsoft APIs** tab is selected
-   - In the *Commonly used Microsoft APIs* section, click on **Microsoft Graph**
-   - In the **Delegated permissions** section, ensure that the right permissions are checked: **User.ReadBasic.All**. Use the search box if necessary.
+   - In the *Commonly used Microsoft APIs* section, click on **Azure DevOps**
+   - In the **Delegated permissions** section, ensure that the right permissions are checked: **user_impersonation**. Use the search box if necessary.
    - Select the **Add permissions** button
 
 ### Step 3:  Configure the sample to use your Azure AD tenant
