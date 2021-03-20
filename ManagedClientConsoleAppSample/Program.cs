@@ -1,68 +1,81 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using System;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using System.Threading.Tasks;
 
 namespace ManagedClientConsoleAppSample
 {
-    //After running the console will close so please add a breakpoint or sleep to see output.
     class Program
     {
-        //============= Config [Edit these with your settings] =====================
-        internal const string azureDevOpsOrganizationUrl = "http://dev.azure.com/organization"; //change to the URL of your Azure DevOps account; NOTE: This must use HTTPS
-        internal const string clientId = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1";          //change to your app registration's Application ID, unless you are an MSA backed account
-        internal const string replyUri = "urn:ietf:wg:oauth:2.0:oob";                     //change to your app registration's reply URI, unless you are an MSA backed account
-        //==========================================================================
+        //
+        // The Client ID is used by the application to uniquely identify itself to Azure AD.
+        // The Tenant is the name or Id of the Azure AD tenant in which this application is registered.
+        // The AAD Instance is the instance of Azure, for example public Azure or Azure China.
+        // The Authority is the sign-in URL of the tenant.
+        //
+        internal static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
+        internal static string tenant = ConfigurationManager.AppSettings["ida:Tenant"];
+        internal static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+        internal static string authority = String.Format(CultureInfo.InvariantCulture, aadInstance, tenant);
 
-        internal const string azureDevOpsResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Constant value to target Azure DevOps. Do not change  
+        //URL of your Azure DevOps account.
+        internal static string azureDevOpsOrganizationUrl = ConfigurationManager.AppSettings["ado:OrganizationUrl"];
 
-        public static void Main(string[] args)
+        internal static string[] scopes = new string[] { "499b84ac-1321-427f-aa17-267ca6975798/user_impersonation" }; //Constant value to target Azure DevOps. Do not change  
+        
+        // MSAL Public client app
+        private static IPublicClientApplication application;
+
+        public static async Task Main(string[] args)
         {
-            AuthenticationContext ctx = GetAuthenticationContext(null);
+            var accessToken = await SignInUserAndGetTokenUsingMSAL(scopes);
+
+            var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", accessToken);
+            
+            ListProjects(bearerAuthHeader);
+
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Sign-in user using MSAL and obtain an access token for Azure DevOps
+        /// </summary>
+        /// <param name="scopes"></param>
+        /// <returns>Access Token</returns>
+        private static async Task<string> SignInUserAndGetTokenUsingMSAL(string[] scopes)
+        {
+            // Initialize the MSAL library by building a public client application
+            application = PublicClientApplicationBuilder.Create(clientId)
+                                       .WithAuthority(authority)
+                                       .WithDefaultRedirectUri()
+                                       .Build();
+            
             AuthenticationResult result = null;
 
-            IPlatformParameters promptBehavior = new PlatformParameters(PromptBehavior.Always);
-    
             try
             {
-                //PromptBehavior.RefreshSession will enforce an authn prompt every time. NOTE: Auto will take your windows login state if possible
-                result = ctx.AcquireTokenAsync(azureDevOpsResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
-                Console.WriteLine("Token expires on: " + result.ExpiresOn);
-
-                var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-                ListProjects(bearerAuthHeader);
+                var accounts = application.GetAccountsAsync().Result;
+                result = await application.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
+                        .ExecuteAsync();
             }
-            catch (UnauthorizedAccessException)
+            catch (MsalUiRequiredException ex)
             {
                 // If the token has expired, prompt the user with a login prompt
-                result = ctx.AcquireTokenAsync(azureDevOpsResourceId, clientId, new Uri(replyUri), promptBehavior).Result;
+                result = await application.AcquireTokenInteractive(scopes)
+                        .WithClaims(ex.Claims)
+                        .ExecuteAsync();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("{0}: {1}", ex.GetType(), ex.Message);
-            }
+            return result.AccessToken;
         }
 
-        private static AuthenticationContext GetAuthenticationContext(string tenant)
-        {
-            AuthenticationContext ctx = null;
-            if (tenant != null)
-                ctx = new AuthenticationContext("https://login.microsoftonline.com/" + tenant);
-            else
-            {
-                ctx = new AuthenticationContext("https://login.windows.net/common");
-                if (ctx.TokenCache.Count > 0)
-                {
-                    string homeTenant = ctx.TokenCache.ReadItems().First().TenantId;
-                    ctx = new AuthenticationContext("https://login.microsoftonline.com/" + homeTenant);
-                }
-            }
-
-            return ctx;
-        }
-
+        /// <summary>
+        /// Get all projects in the organization that the authenticated user has access to and print the results.
+        /// </summary>
+        /// <param name="authHeader"></param>
         private static void ListProjects(AuthenticationHeaderValue authHeader)
         {
             // use the httpclient
@@ -81,7 +94,7 @@ namespace ManagedClientConsoleAppSample
                 // check to see if we have a succesfull respond
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("\tSuccesful REST call");
+                    Console.WriteLine("Succesful REST call");
                     var result = response.Content.ReadAsStringAsync().Result;
                     Console.WriteLine(result);
                 }
