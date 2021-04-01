@@ -1,31 +1,44 @@
-﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿using Microsoft.Identity.Client;
 using System;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace DeviceProfileSample
 {
     public class Program
     {
-        //============= Config [Edit these with your settings] =====================
-        internal const string vstsCollectionUrl = "https://myaccount.visualstudio.com"; //change to the URL of your VSTS account; NOTE: This must use HTTPS
-        internal const string clientId = "872cd9fa-d31f-45e0-9eab-6e460a02d1f1";        //update this with your Application ID from step 2.6 (do not change this if you have an MSA backed account)
-        //==========================================================================
+        //
+        // The Client ID is used by the application to uniquely identify itself to Azure AD.
+        // The Tenant is the name or Id of the Azure AD tenant in which this application is registered.
+        // The AAD Instance is the instance of Azure, for example public Azure or Azure China.
+        // The Authority is the sign-in URL of the tenant.
+        //
+        internal static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
+        internal static string tenant = ConfigurationManager.AppSettings["ida:Tenant"];
+        internal static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+        internal static string authority = String.Format(CultureInfo.InvariantCulture, aadInstance, tenant);
 
-        internal const string VSTSResourceId = "499b84ac-1321-427f-aa17-267ca6975798"; //Static value to target VSTS. Do not change
+        //Constant value to target Azure DevOps. Do not change  
+        internal static string[] scopes = new string[] { "499b84ac-1321-427f-aa17-267ca6975798/user_impersonation" };
         
+        //URL of your Azure DevOps account.
+        internal static string azureDevOpsOrganizationUrl = ConfigurationManager.AppSettings["ado:OrganizationUrl"];
+        
+        // The MSAL Public client app
+        private static IPublicClientApplication application;
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            AuthenticationContext ctx = GetAuthenticationContext(null);
+
             AuthenticationResult result = null;
             try
             {
-                DeviceCodeResult codeResult = ctx.AcquireDeviceCodeAsync(VSTSResourceId, clientId).Result;
-                Console.WriteLine("You need to sign in.");
-                Console.WriteLine("Message: " + codeResult.Message + "\n");
-                result = ctx.AcquireTokenByDeviceCodeAsync(codeResult).Result;
+
+                result = await SignInUserAndGetTokenUsingMSAL(scopes);
 
                 var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
                 ListProjects(bearerAuthHeader);
@@ -36,24 +49,51 @@ namespace DeviceProfileSample
                 Console.WriteLine("Something went wrong.");
                 Console.WriteLine("Message: " + ex.Message + "\n");
             }
+            Console.ReadLine();
         }
 
-        private static AuthenticationContext GetAuthenticationContext(string tenant)
+        /// <summary>
+        /// Signs in the user using the device code flow and obtains an Access token for MS Graph
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="scopes"></param>
+        /// <returns></returns>
+        private static async Task<AuthenticationResult> SignInUserAndGetTokenUsingMSAL(string[] scopes)
         {
-            AuthenticationContext ctx = null;
-            if (tenant != null)
-                ctx = new AuthenticationContext("https://login.microsoftonline.com/" + tenant);
-            else
-            {
-                ctx = new AuthenticationContext("https://login.windows.net/common");
-                if (ctx.TokenCache.Count > 0)
-                {
-                    string homeTenant = ctx.TokenCache.ReadItems().First().TenantId;
-                    ctx = new AuthenticationContext("https://login.microsoftonline.com/" + homeTenant);
-                }
-            }
+            // Initialize the MSAL library by building a public client application
+            application = PublicClientApplicationBuilder.Create(clientId)
+                                                    .WithAuthority(authority)
+                                                    .WithDefaultRedirectUri()
+                                                    .Build();
 
-            return ctx;
+
+            AuthenticationResult result;
+
+            try
+            {
+                var accounts = await application.GetAccountsAsync();
+                // Try to acquire an access token from the cache. If device code is required, Exception will be thrown.
+                result = await application.AcquireTokenSilent(scopes, accounts.FirstOrDefault()).ExecuteAsync();
+            }
+            catch (MsalUiRequiredException)
+            {
+                result = await application.AcquireTokenWithDeviceCode(scopes, deviceCodeResult =>
+                {
+                    // This will print the message on the console which tells the user where to go sign-in using
+                    // a separate browser and the code to enter once they sign in.
+                    // The AcquireTokenWithDeviceCode() method will poll the server after firing this
+                    // device code callback to look for the successful login of the user via that browser.
+                    // This background polling (whose interval and timeout data is also provided as fields in the
+                    // deviceCodeCallback class) will occur until:
+                    // * The user has successfully logged in via browser and entered the proper code
+                    // * The timeout specified by the server for the lifetime of this code (typically ~15 minutes) has been reached
+                    // * The developing application calls the Cancel() method on a CancellationToken sent into the method.
+                    //   If this occurs, an OperationCanceledException will be thrown (see catch below for more details).
+                    Console.WriteLine(deviceCodeResult.Message);
+                    return Task.FromResult(0);
+                }).ExecuteAsync();
+            }
+            return result;
         }
 
         private static void ListProjects(AuthenticationHeaderValue authHeader)
@@ -61,7 +101,7 @@ namespace DeviceProfileSample
             // use the httpclient
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(vstsCollectionUrl);
+                client.BaseAddress = new Uri(azureDevOpsOrganizationUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("User-Agent", "VstsRestApiSamples");
