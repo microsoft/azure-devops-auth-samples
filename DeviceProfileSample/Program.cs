@@ -33,15 +33,14 @@ namespace DeviceProfileSample
 
         public static async Task Main(string[] args)
         {
-
-            AuthenticationResult result = null;
             try
             {
+               var authResult = await SignInUserAndGetTokenUsingMSAL(scopes);
 
-                result = await SignInUserAndGetTokenUsingMSAL(scopes);
+                // Create authorization header of the form "Bearer {AccessToken}"
+                var authHeader = authResult.CreateAuthorizationHeader();
 
-                var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-                ListProjects(bearerAuthHeader);
+                ListProjects(authHeader);
             }
             catch (Exception ex)
             {
@@ -53,11 +52,11 @@ namespace DeviceProfileSample
         }
 
         /// <summary>
-        /// Signs in the user using the device code flow and obtains an Access token for MS Graph
+        /// Signs in the user using the device code flow and obtain an access token for Azure DevOps
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="scopes"></param>
-        /// <returns></returns>
+        /// <returns>AuthenticationResult</returns>
         private static async Task<AuthenticationResult> SignInUserAndGetTokenUsingMSAL(string[] scopes)
         {
             // Initialize the MSAL library by building a public client application
@@ -96,7 +95,11 @@ namespace DeviceProfileSample
             return result;
         }
 
-        private static void ListProjects(AuthenticationHeaderValue authHeader)
+        /// <summary>
+        /// Get all projects in the organization that the authenticated user has access to and print the results.
+        /// </summary>
+        /// <param name="authHeader"></param>
+        private static void ListProjects(string authHeader)
         {
             // use the httpclient
             using (var client = new HttpClient())
@@ -106,7 +109,7 @@ namespace DeviceProfileSample
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("User-Agent", "VstsRestApiSamples");
                 client.DefaultRequestHeaders.Add("X-TFS-FedAuthRedirect", "Suppress");
-                client.DefaultRequestHeaders.Authorization = authHeader;
+                client.DefaultRequestHeaders.Add("Authorization", authHeader);
 
                 // connect to the REST endpoint            
                 HttpResponseMessage response = client.GetAsync("_apis/projects?stateFilter=All&api-version=2.2").Result;

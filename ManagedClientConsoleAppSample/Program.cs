@@ -32,28 +32,37 @@ namespace ManagedClientConsoleAppSample
 
         public static async Task Main(string[] args)
         {
-            var accessToken = await SignInUserAndGetTokenUsingMSAL(scopes);
+            try
+            {
+                var authResult = await SignInUserAndGetTokenUsingMSAL(scopes);
 
-            var bearerAuthHeader = new AuthenticationHeaderValue("Bearer", accessToken);
-            
-            ListProjects(bearerAuthHeader);
+                // Create authorization header of the form "Bearer {AccessToken}"
+                var authHeader = authResult.CreateAuthorizationHeader();
 
+                ListProjects(authHeader);
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Something went wrong.");
+                Console.WriteLine("Message: " + ex.Message + "\n");
+            }
             Console.ReadLine();
         }
-
+       
         /// <summary>
         /// Sign-in user using MSAL and obtain an access token for Azure DevOps
         /// </summary>
         /// <param name="scopes"></param>
-        /// <returns>Access Token</returns>
-        private static async Task<string> SignInUserAndGetTokenUsingMSAL(string[] scopes)
+        /// <returns>AuthenticationResult</returns>
+        private static async Task<AuthenticationResult> SignInUserAndGetTokenUsingMSAL(string[] scopes)
         {
             // Initialize the MSAL library by building a public client application
             application = PublicClientApplicationBuilder.Create(clientId)
                                        .WithAuthority(authority)
                                        .WithDefaultRedirectUri()
                                        .Build();
-            
+
             AuthenticationResult result = null;
 
             try
@@ -69,14 +78,14 @@ namespace ManagedClientConsoleAppSample
                         .WithClaims(ex.Claims)
                         .ExecuteAsync();
             }
-            return result.AccessToken;
+            return result;
         }
 
         /// <summary>
         /// Get all projects in the organization that the authenticated user has access to and print the results.
         /// </summary>
         /// <param name="authHeader"></param>
-        private static void ListProjects(AuthenticationHeaderValue authHeader)
+        private static void ListProjects(string authHeader)
         {
             // use the httpclient
             using (var client = new HttpClient())
@@ -86,7 +95,7 @@ namespace ManagedClientConsoleAppSample
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("User-Agent", "ManagedClientConsoleAppSample");
                 client.DefaultRequestHeaders.Add("X-TFS-FedAuthRedirect", "Suppress");
-                client.DefaultRequestHeaders.Authorization = authHeader;
+                client.DefaultRequestHeaders.Add("Authorization", authHeader);
 
                 // connect to the REST endpoint            
                 HttpResponseMessage response = client.GetAsync("_apis/projects?stateFilter=All&api-version=2.2").Result;
