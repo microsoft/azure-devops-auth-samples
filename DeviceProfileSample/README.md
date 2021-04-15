@@ -1,10 +1,10 @@
 # Device Profile Sample
 
-For a headless text output client application, it is not possible authenticate through an interactive prompt. Instead a text only approach is necessary. This flow leverages a user's external device (i.e. phone) to authenticate through an interactive login prompt and pass the auth token to the headless application. For more information [click here](https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-deviceprofile/?v=17.23h).
+For a headless text output client application, it is not possible authenticate through an interactive prompt. Instead a text only approach is necessary. This flow leverages a user's external device (i.e. phone) to authenticate through an interactive login prompt and pass the auth token to the headless application. For more information [click here](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code).
 
 ## Sample Application
 
-This buildable sample will walk you through the steps to create a client-side console application which uses ADAL to authenticate a user via the [Device Profile flow](https://azure.microsoft.com/en-us/resources/samples/active-directory-dotnet-deviceprofile/?v=17.23h) and returns a JSON string containing all account team project data viewable by the authenticated user.
+This buildable sample will walk you through the steps to create a client-side console application which uses ADAL to authenticate a user via the [Device Profile flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code) and returns a JSON string containing all account team project data viewable by the authenticated user.
 
 To run this sample for an [Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/active-directory-whatis) backed Azure DevOps account you will need:
 * [Visual Studio IDE](https://www.visualstudio.com/vs/)
