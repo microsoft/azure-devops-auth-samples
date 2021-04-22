@@ -63,11 +63,11 @@ namespace ManagedClientConsoleAppSample
                                        .WithDefaultRedirectUri()
                                        .Build();
 
-            AuthenticationResult result = null;
+            AuthenticationResult result;
 
             try
             {
-                var accounts = application.GetAccountsAsync().Result;
+                var accounts = await application.GetAccountsAsync();
                 result = await application.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
                         .ExecuteAsync();
             }
