@@ -12,7 +12,7 @@ Learn more about [integrating with Azure DevOps](https://docs.microsoft.com/en-u
 * [Device profile sample (.NET Core)](./DeviceProfileSample/README.md)
 * [ASP.NET Web app OAuth sample](./OAuthWebSample/README.md)
 * [Client library sample (using VSSConnection)](./ClientLibraryConsoleAppSample/README.md)
-* [Javascript web app sample (using Azure Active Directory JS Library)](./JavascriptWebAppSample/README.md)
+* [Javascript web app sample (using Microsoft Authentication Library for JavaScript)](./JavascriptWebAppSample/README.md)
 * [Dual Support (Azure DevOps/TFS) Client Sample (using Azure Active Directory Library and Windows Authentication)](./DualSupportClientSample/README.md)
 * [Non-interactive PAT Generation Sample (using Azure Active Directory Library with a Username Password credential)](./NonInteractivePatGenerationSample/README.md)
 * [PAT lifecycle management API sample (using Microsoft Authentication Library with authentication code)](./PersonalAccessTokenAPIAppSample/README.md)
