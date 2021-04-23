@@ -1,0 +1,28 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (User?.Identity?.IsAuthenticated ?? false)
+{
+    <h1>Welcome, @User.Identity.Name</h1>
+
+    <p>
+        @foreach (var claim in @Model.HttpContext.User.Claims)
+        {
+            <div><code>@claim.Type</code>: <strong>@claim.Value</strong></div>
+        }
+    </p>
+    <form action="/signout" method="post">
+        <button class="btn btn-lg btn-success m-1" type="submit">Sign Out</button>
+    </form>
+}
+else
+{
+    <h1>Welcome, anonymous</h1>
+    <form action="/signin" method="post">
+        <button class="btn btn-lg btn-success m-1" type="submit">Sign In</button>
+    </form>
+} 
+
