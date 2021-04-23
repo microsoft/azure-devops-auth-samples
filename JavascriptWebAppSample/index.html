@@ -1,115 +1,53 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Azure DevOps Autentication ADAL.JS Sample</title>
-        <meta charset="utf-8" />
-        <style type="text/css">body { font-family: Tahoma; padding: 3em; } </style>
-        <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.11/js/adal.min.js"></script>
-    </head>
-    <body>
-        <p>
-            Azure DevOps Authentication - ADAL.JS Sample
-        </p>
-        <p>
-            <a href="#" onclick="loginButtonPress();">
-                <div id="loginButton" class="nav"> Log in</div>
-            </a>
-            <a href="#" onclick="logoutButtonPress();">
-                <div id="logoutButton" class="nav" style="display:none;"> Log out</div>
-            </a>
-        </p>
-        <p id="username"></p>
-        <pre id="api_response"></pre>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Microsoft identity platform</title>
+    <link rel="SHORTCUT ICON" href="./favicon.svg" type="image/x-icon">
+    
+    <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
+    <script src="https://alcdn.msauth.net/browser/2.12.1/js/msal-browser.js" integrity="sha384-QMpSjAFJzgh/J1zBL23Xx95KfVI1n9Je9GmB3byJbZ0/hj8o9CJTmxOK/BPZivil" crossorigin="anonymous"></script>
 
-        <script type="text/javascript">
-            //========= Input Vars ================================
-            var clientId = 'xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';                                     //Update with your app registration's Application ID (step 2.6)
-            var replyUri = 'http://localhost:8081';                                                 //Where you will receive the token. (step 2.5)
-            var logoutRedirectUri = 'http://localhost:8081';                                        //Where you return upon signout. Update if you are hosting your webpage somewhere else
-            var azureDevOpsApi = 'https://dev.azure.com/organization/_apis/projects?api-version=4.0'; //Update if want to access a different vsts API
-            var azureDevOpsResourceId = '499b84ac-1321-427f-aa17-267ca6975798';                       //Do not change. Needed to get a Azure DevOps ADAL access token.
-            //=====================================================
+    <!-- To help ensure reliability, Microsoft provides a second CDN -->
+    <script type="text/javascript">
+      if(typeof Msal === 'undefined')document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.12.1/js/msal-browser.js' type='text/javascript' crossorigin='anonymous' %3E%3C/script%3E"));
+    </script>
 
-            // Set up ADAL
-            var authContext = new AuthenticationContext({
-                clientId: clientId,
-                redirectUri:replyUri,
-                postLogoutRedirectUri: logoutRedirectUri
-            });
-            
-            if (authContext.isCallback(window.location.hash)) {
-                // Handle redirect after token requests
-                authContext.handleWindowCallback();
-                var err = authContext.getLoginError();
-                if (err) {
-                    // Handle error
-                    document.getElementById('api_response').textContent =
-                        'ERROR:\n\n' + err;
-                }
-            } else {
-                // If logged in, get access token and make an API request
-                var user = authContext.getCachedUser();
-                if (user) {
-                    document.getElementById('username').textContent = 'Signed in as: ' + user.userName;
-                    document.getElementById('api_response').textContent = 'Getting access token...';
-                    
-                    // Get an access token to VSTS
-                    authContext.acquireToken(
-                        azureDevOpsResourceId,
-                        function (error, token) {
-                            if (error || !token) {
-                                document.getElementById('api_response').textContent =
-                                    'ERROR:\n\n' + error;
-                                return;
-                            }
-                            // Use the access token
-                            getCurrentUserInfo(token);
-                        }
-                    );
-                } else {
-                    document.getElementById('username').textContent = 'Not signed in.';
-                }
-            }
-            // Make an AJAX request to the Azure DevOps REST API and print the response as JSON.
-            var getCurrentUserInfo = function (access_token) {
-                document.getElementById('api_response').textContent = 'Calling API...';
-                var xhr = new XMLHttpRequest();
-                //API called with ADAL token
-                xhr.open('GET', vstsApi, true);
-                xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        // Parse Successful Response
-                        document.getElementById('api_response').textContent =
-                            JSON.stringify(JSON.parse(xhr.responseText), null, '  ');
-                    } else {
-                        // Handle Error
-                        document.getElementById('api_response').textContent =
-                            'ERROR:\n\n' + xhr.responseText;
-                    }
-                };
-                xhr.send();
-            }
-            var loginButtonPress = function() {
-                authContext.login();
+    <!-- adding Bootstrap 4 for UI components  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">Azure DevOps</a>
+      <div class="btn-group ml-auto dropleft">
+        <button type="button" id="signIn" class="btn btn-secondary" onclick="signIn()">Sign-in</button>
+        <button type="button" id="signOut" class="btn btn-success d-none" onclick="signOut()">Sign-out</button>
+      </div>
+    </nav>
+    <br>
+    <h5 id="title-div" class="card-header text-center">JavaScript single-page application secured with MSAL.js</h5>
+    <h5 id="welcome-div" class="card-header text-center d-none"></h5>
+    <br>
 
-                //hide login button
-                var loginButton = document.getElementById('loginButton');
-                loginButton.style.display = 'none';
-                //show logout button
-                var logoutButton =document.getElementById('logoutButton');
-                logoutButton.style.display = 'block';
-            }
-            var logoutButtonPress = function() {
-                authContext.logout();
+    <!-- Content -->
+    <div class="card">
+      <div class="card-body text-center">
+        <h5 id="label" class="card-title">Sign-in with the Microsoft identity platform</h5>
+        <pre id="response" class="card-text"></pre>
+        <button type="button" id="callApiButton" class="btn btn-primary d-none" onclick="passTokenToApi()">Call DevOps Rest API</button>
+      </div>
+    </div>
 
-                //show login button
-                var loginButton = document.getElementById('loginButton');
-                loginButton.style.display = 'block';
-                //hide logouot button
-                var logoutButton =document.getElementById('logoutButton');
-                logoutButton.style.display = 'none';
-            }
-        </script>
-    </body>
+    <!-- importing bootstrap.js and supporting js libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <!-- importing app scripts (load order is important) -->
+    <script type="text/javascript" src="./config.js"></script>
+    <script type="text/javascript" src="./ui.js"></script>
+    <script type="text/javascript" src="./fetch.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+  </body>
 </html>
