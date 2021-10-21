@@ -84,6 +84,7 @@ namespace DeviceProfileSample
                 else
                 {
                     Console.WriteLine("{0}:{1}", response.StatusCode, response.ReasonPhrase);
+                    Console.WriteLine("Just for test");
                 }
             }
         }
