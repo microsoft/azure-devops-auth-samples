@@ -13,7 +13,7 @@ namespace OAuthSample.Controllers
             ViewBag.ClientAppId = System.Configuration.ConfigurationManager.AppSettings["ClientAppId"];
             ViewBag.CallbackUrl = System.Configuration.ConfigurationManager.AppSettings["CallbackUrl"];
             ViewBag.Scope = System.Configuration.ConfigurationManager.AppSettings["Scope"];
-            
+
             return View();
         }
 
