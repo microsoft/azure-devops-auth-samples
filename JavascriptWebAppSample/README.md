@@ -48,9 +48,10 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `config.js` file
-1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `devops-js-app` application copied from the Azure portal.
-1. Find the key `https://login.microsoftonline.com/Enter_the_Tenant_Info_Here` and replace the existing value with `https://login.microsoftonline.com/<your-tenant-id>`.
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the base address of the `devops-js-app` project (by default `http://localhost:8081`).
+1. Find the key `Enter_the_Application_Id_Here` and replace it with the application ID (clientId) of the `devops-js-app` application copied from the Azure portal.
+1. Find the key `Enter_the_Tenant_Id_Here` and replace it with the ID of your Azure AD tenant.
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace it with the base address of the `devops-js-app` project (by default `http://localhost:8081`).
+1. Find the key `Enter_the_Tenant_Name_Here` and replace it with the name of your Azure AD tenant.
 
 ## Running the sample
 
