@@ -1,22 +1,39 @@
-# Non-interactive PAT generation Sample
+# Non-interactive PAT generation sample
 
-This sample shows how to generate a Personal Access Token (PAT) using the [Client Libraries](https://docs.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries?view=vsts). You cannot use a PAT to generate a PAT and so this sample makes use of the Azure Active Directory Authentication Library (ADAL) to acquire an AAD token which is then used as a credential to authenticate requests to Azure DevOps. This sample also uses the UserPasswordCredential rather than relying on the interactive pop-up dialog - this can be useful in scenarios where you need to generate a PAT associated with an account that does not have interactive login rights.
+This sample shows how to generate a Personal Access Token (PAT) using the [Client Libraries](https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries?view=azure-devops) and the [PAT Lifecycle Management API](https://learn.microsoft.com/en-us/rest/api/azure/devops/tokens). Requests to this API need to be authorized with an Azure Active Directory (AAD) access token. 
 
-## Sample Application
+This sample uses the `PublicClientApplicationBuilder` from **Microsoft Authentication Library (MSAL)** rather than relying on the interactive pop-up dialog to get an AAD access token which is then used as a credential to authenticate requests to Azure DevOps. This is meant to be used in scenarios where you need to generate a PAT associated with an account that does not have interactive login rights.
 
-This sample shows the basic flow for calling ADAL, and then using the resulting token as credentials to call the ```CreateSessionToken``` method on the ```DelegatedAuthorizationHttpClient``` class. In order to run this application you will need to [register your own AAD application](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v1-integrate-apps-with-azure-ad).
+## How to run this sample
 
- ## Step 1: Clone or download vsts-auth-samples repository
+**Prerequisites**
 
-From a shell or command line: 
-```no-highlight
-git clone https://github.com/Microsoft/vsts-auth-samples.git
+- [.NET Framework 4.7.2 SDK](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
+- [An Application in your Azure Active Directory (Azure AD) tenant](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app)
+- _(optional)_ [Visual Studio / Visual Studio Code](https://visualstudio.microsoft.com/downloads/)
+
+
+### Step 1: Clone or download this repository
+
+From a shell or command line:
+```
+git clone https://github.com/microsoft/azure-devops-auth-samples.git
 ```
 
-## Step 2: Run the sample
+### Step 2: Configure the sample to use your Azure AD application
 
-1. Navigate to the sample in cloned repo `vsts-auth-samples/NonInteractivePatGenerationSample/`
-2. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed
-3. Open the solution file `NonInteractivePatGenerationSample.sln` in [Visual Studio 2017](https://www.visualstudio.com/downloads/)
-4. Open CS file ```Program.cs``` and look at the first few lines in the ```Main``` method. Replace the username and password with the appropriate values. You will need to get the ```aadApplicationID``` value by [registering your app in AAD](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v1-integrate-apps-with-azure-ad).
-6. Build and run the solution, the generate PAT will be output to the console window.
+Update the configuration file `App.config` with the information about your AAD application, AAD crendentials and Azure DevOps organization.
+
+### Step 3: Run the sample
+
+**From Visual Studio:**
+1. Open the solution file `NonInteractivePatGenerationSample.sln`.
+2. Build and run the project.
+
+-- OR --
+
+**From the command line:**
+```cmd
+cd NonInteractivePatGenerationSample/NonInteractivePatGenerationSample
+dotnet run
+```
