@@ -22,7 +22,7 @@ git clone https://github.com/microsoft/azure-devops-auth-samples.git
 
 ### Step 2: Configure the sample to use your Azure AD application
 
-Update the configuration file `App.config` with the information about your AAD application, AAD crendentials and Azure DevOps organization.
+Update the configuration file `App.config` with the information about your AAD application, AAD credentials, and Azure DevOps organization.
 
 ### Step 3: Run the sample
 
