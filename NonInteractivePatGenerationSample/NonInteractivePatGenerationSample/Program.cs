@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Globalization;
+using System.Threading.Tasks;
 using Microsoft.Identity.Client;
 using Microsoft.VisualStudio.Services.Client;
 using Microsoft.VisualStudio.Services.DelegatedAuthorization;
@@ -14,44 +15,51 @@ namespace NonInteractivePatGenerationSample
         internal static string[] scopes = new string[] { "499b84ac-1321-427f-aa17-267ca6975798/user_impersonation" }; //Constant value to target Azure DevOps. Do not change 
 
         // The Azure AD Instance is the instance of Azure, for example public Azure or Azure China.
-        internal static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
+        internal static string aadInstance = ConfigurationManager.AppSettings["aad:AADInstance"];
         // The Tenant is the name or Id of the Azure AD tenant in which this application is registered.
         internal static string tenant = ConfigurationManager.AppSettings["aad:Tenant"];
         // The Client ID is used by the application to uniquely identify itself to Azure AD.
         internal static string clientId = ConfigurationManager.AppSettings["aad:ClientId"];
         // The Authority is the sign-in URL of the tenant.
         internal static string authority = String.Format(CultureInfo.InvariantCulture, aadInstance, tenant);
-        
+
         // Azure AD Credentials
         internal static string username = ConfigurationManager.AppSettings["aad:Username"];
         internal static string password = ConfigurationManager.AppSettings["aad:Password"];
 
         //URL of your Azure DevOps account.
-        internal static string azureDevOpsOrganizationUrl = ConfigurationManager.AppSettings["ado:OrganizationUrl"];         
+        internal static string azureDevOpsOrganizationUrl = ConfigurationManager.AppSettings["ado:OrganizationUrl"];
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            // MSAL Public client app
-            var application = PublicClientApplicationBuilder.Create(clientId)
-                                       .WithAuthority(authority)
-                                       .WithDefaultRedirectUri()
-                                       .Build();
-            var result = application.AcquireTokenByUsernamePassword(scopes, username, password).ExecuteAsync().Result;
+            var result = await GetAadAccessToken();
 
             var token = new VssAadToken(result.TokenType, result.AccessToken);
             var vstsCredential = new VssAadCredential(token);
 
             var connection = new VssConnection(new Uri(azureDevOpsOrganizationUrl), vstsCredential);
 
-            CreatePatUsingNewPatApi(connection);
+            await CreatePat(connection);
+        }
+
+        /// <summary>
+        /// Acquires an AAD access token using a public client application (MSAL)
+        /// </summary>
+        /// <returns>Token acquisition result</returns>
+        private static async Task<AuthenticationResult> GetAadAccessToken()
+        {
+            var application = PublicClientApplicationBuilder.Create(clientId)
+                .WithAuthority(authority)
+                .WithDefaultRedirectUri()
+                .Build();
+            return await application.AcquireTokenByUsernamePassword(scopes, username, password).ExecuteAsync();
         }
 
         /// <summary>
         /// Creates a PAT using the PAT Lifecycle Management API (https://learn.microsoft.com/en-us/rest/api/azure/devops/tokens)
         /// </summary>
         /// <param name="connection">Azure DevOps connection</param>
-        /// <returns></returns>
-        private static void CreatePatUsingNewPatApi(VssConnection connection)
+        private static async Task CreatePat(VssConnection connection)
         {
             var client = connection.GetClient<TokensHttpClient>();
 
@@ -61,7 +69,7 @@ namespace NonInteractivePatGenerationSample
                 Scope = "vso.work vso.graph"
             };
 
-            var patTokenResult = client.CreatePatAsync(request).Result;
+            var patTokenResult = await client.CreatePatAsync(request);
 
             if (patTokenResult.PatTokenError == SessionTokenError.None)
             {
