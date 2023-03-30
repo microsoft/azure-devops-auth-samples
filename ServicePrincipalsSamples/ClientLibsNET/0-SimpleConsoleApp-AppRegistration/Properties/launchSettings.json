@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "0-ConsoleApp-AppRegistration": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}

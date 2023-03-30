@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1-ConsoleApp-AppRegistration", "1-ConsoleApp-AppRegistration\1-ConsoleApp-AppRegistration.csproj", "{EDFAC736-E098-416E-A8EE-54BFA6FFD293}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89992743-9EFD-4840-87C0-6032DCE1E2B9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "0-SimpleConsoleApp-AppRegistration", "0-SimpleConsoleApp-AppRegistration\0-SimpleConsoleApp-AppRegistration.csproj", "{D6F07467-04B7-4BB6-BF08-48BA074F38DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2-ConsoleApp-ManagedIdentity", "2-ConsoleApp-ManagedIdentity\2-ConsoleApp-ManagedIdentity.csproj", "{03210CB0-0C27-425F-82DD-CD7AE28DB271}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-AzureFunction-ManagedIdentity", "3-AzureFunction-ManagedIdentity\3-AzureFunction-ManagedIdentity.csproj", "{BCDE96F6-6934-4104-AF19-99701300E2C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDFAC736-E098-416E-A8EE-54BFA6FFD293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDFAC736-E098-416E-A8EE-54BFA6FFD293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDFAC736-E098-416E-A8EE-54BFA6FFD293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDFAC736-E098-416E-A8EE-54BFA6FFD293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6F07467-04B7-4BB6-BF08-48BA074F38DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F07467-04B7-4BB6-BF08-48BA074F38DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F07467-04B7-4BB6-BF08-48BA074F38DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F07467-04B7-4BB6-BF08-48BA074F38DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03210CB0-0C27-425F-82DD-CD7AE28DB271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03210CB0-0C27-425F-82DD-CD7AE28DB271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03210CB0-0C27-425F-82DD-CD7AE28DB271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03210CB0-0C27-425F-82DD-CD7AE28DB271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCDE96F6-6934-4104-AF19-99701300E2C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCDE96F6-6934-4104-AF19-99701300E2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCDE96F6-6934-4104-AF19-99701300E2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCDE96F6-6934-4104-AF19-99701300E2C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67C3D201-AA44-4D13-A9FA-1D8989E570F2}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "ConsoleApp (Default)": {
+      "commandName": "Project"
+    },
+    "ConsoleApp (Dev)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Dev"
+      }
+    },
+    "ConsoleApp (Prod)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Prod"
+      }
+    }
+  }
+}
