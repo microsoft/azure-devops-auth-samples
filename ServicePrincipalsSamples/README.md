@@ -6,7 +6,7 @@ These samples show how to [use Azure AD Service Principals and Managed Identitie
 
 | Subfolder | Description |
 |--|--|
-| [ClientLibsNET](/ServicePrincipalsSamples/ClientLibsNET/) | .NET Core samples using [Azure DevOps .NET client libraries](https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries?view=azure-devops) with Azure AD Application Service Principals and Manages Identities. |
+| [ClientLibsNET](/ServicePrincipalsSamples/ClientLibsNET/) | .NET Core samples using [Azure DevOps .NET client libraries](https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries?view=azure-devops) with Azure AD Application Service Principals and Managed Identities. |
 
 ## References
 
