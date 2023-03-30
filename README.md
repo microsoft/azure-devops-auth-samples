@@ -16,3 +16,4 @@ Learn more about [integrating with Azure DevOps](https://docs.microsoft.com/en-u
 * [Dual Support (Azure DevOps/TFS) Client Sample (using Azure Active Directory Library and Windows Authentication)](./DualSupportClientSample/README.md)
 * [Non-interactive PAT Generation Sample (using Azure Active Directory Library with a Username Password credential)](./NonInteractivePatGenerationSample/README.md)
 * [PAT lifecycle management API sample (using Microsoft Authentication Library with authentication code)](./PersonalAccessTokenAPIAppSample/README.md)
+* [Azure AD Service Principals and Managed Identities in Azure DevOps](/ServicePrincipalsSamples/)

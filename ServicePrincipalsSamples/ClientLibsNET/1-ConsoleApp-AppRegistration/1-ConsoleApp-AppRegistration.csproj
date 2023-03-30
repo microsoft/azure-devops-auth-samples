@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>ServicePrincipalsSamples</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.51.0" />
+		<PackageReference Include="Microsoft.Identity.Web.Certificate" Version="2.6.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Identity.Web.TokenCache" Versio11n="1.25.0" Version="2.6.1" />
+		<PackageReference Include="Microsoft.TeamFoundationServer.Client" Version="19.219.0-preview" />
+		<PackageReference Include="Microsoft.VisualStudio.Services.InteractiveClient" Version="19.219.0-preview" />
+		<PackageReference Include="Microsoft.VisualStudio.Services.MemberEntitlementManagement.WebApi" Version="19.219.0-preview" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Settings\**" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+</Project>
