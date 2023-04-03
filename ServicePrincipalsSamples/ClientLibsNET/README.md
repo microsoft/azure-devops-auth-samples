@@ -55,4 +55,4 @@ var token = new VssAadToken((scopes) => app.AcquireTokenForClient(scopes).Execut
 var credentials = new VssAadCredential(token);
 ```
 
-See [1-ConsoleApp-AppRegistration](/1-ConsoleApp-AppRegistration/) for more information.
+See [1-ConsoleApp-AppRegistration](/ServicePrincipalsSamples/ClientLibsNET/1-ConsoleApp-AppRegistration/) for more information.
