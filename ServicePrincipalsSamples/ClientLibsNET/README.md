@@ -6,10 +6,10 @@ These .NET Core samples show how to use Azure AD Service Principals and Managed 
 
 | Project | Description |
 |--|--|
-| [0-SimpleConsoleApp-AppRegistration](/0-SimpleConsoleApp-AppRegistration/) | It uses an Azure AD Application Service Principal to create get a work item. |
-| [1-ConsoleApp-AppRegistration](/1-ConsoleApp-AppRegistration/) | It uses an Azure AD Application Service Principal to perform multiple operations in Azure DevOps. It also shows how to use the MSAL in-memory token cache and handle the access token expiration. |
-| [2-ConsoleApp-ManagedIdentity](/2-ConsoleApp-ManagedIdentity/) | It uses an Azure AD Managed Identity to get a work item. |
-| [3-AzureFunction-ManagedIdentity](/3-AzureFunction-ManagedIdentity/) | It uses an Azure AD Managed Identity to get a work item using an Azure Function. |
+| [0-SimpleConsoleApp-AppRegistration](/ServicePrincipalsSamples/ClientLibsNET/0-SimpleConsoleApp-AppRegistration/) | It uses an Azure AD Application Service Principal to create get a work item. |
+| [1-ConsoleApp-AppRegistration](/ServicePrincipalsSamples/ClientLibsNET/1-ConsoleApp-AppRegistration/) | It uses an Azure AD Application Service Principal to perform multiple operations in Azure DevOps. It also shows how to use the MSAL in-memory token cache and handle the access token expiration. |
+| [2-ConsoleApp-ManagedIdentity](/ServicePrincipalsSamples/ClientLibsNET/2-ConsoleApp-ManagedIdentity/) | It uses an Azure AD Managed Identity to get a work item. |
+| [3-AzureFunction-ManagedIdentity](/ServicePrincipalsSamples/ClientLibsNET/3-AzureFunction-ManagedIdentity/) | It uses an Azure AD Managed Identity to get a work item using an Azure Function. |
 
 ## Usage with Azure DevOps .NET client libs
 
