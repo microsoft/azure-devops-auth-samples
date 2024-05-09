@@ -38,11 +38,7 @@ else
 // Whenever possible, credential instance should be reused for the lifetime of the process.
 // An internal token cache is used which reduces the number of outgoing calls to Azure AD to get tokens.
 // Call GetTokenAsync whenever you are making a request. Token caching and refresh logic is handled by the credential object.
-var tokenRequestContext = new TokenRequestContext(VssAadSettings.DefaultScopes);
-var accessToken = await credential.GetTokenAsync(tokenRequestContext, CancellationToken.None);
-
-var vssAadToken = new VssAadToken("Bearer", accessToken.Token);
-var vssAadCredentials = new VssAadCredential(vssAadToken);
+var vssAadCredentials = new VssAzureIdentityCredential(credential);
 
 var orgUrl = new Uri(new Uri(AdoBaseUrl), AdoOrgName);
 var connection = new VssConnection(orgUrl, vssAadCredentials);

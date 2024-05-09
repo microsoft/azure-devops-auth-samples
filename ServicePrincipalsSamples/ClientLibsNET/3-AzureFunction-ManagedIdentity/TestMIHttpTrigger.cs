@@ -57,7 +57,7 @@ namespace Company.Function
                 return new BadRequestObjectResult($"Invalid Work item ID: {req.Query["workItemId"]}.");
             }
 
-            var vssConnection = await CreateVssConnection();
+            var vssConnection = CreateVssConnection();
 
             var workItemTrackingHttpClient = vssConnection.GetClient<WorkItemTrackingHttpClient>();
             
@@ -75,11 +75,9 @@ namespace Company.Function
             }
         }
 
-        private static async Task<VssConnection> CreateVssConnection()
+        private static VssConnection CreateVssConnection()
         {
-            var accessToken = await GetManagedIdentityAccessToken();
-            var token = new VssAadToken("Bearer", accessToken);
-            var credentials = new VssAadCredential(token);
+            var credentials = new VssAzureIdentityCredential(credential);
 
             var settings = VssClientHttpRequestSettings.Default.Clone();
             settings.UserAgent = AppUserAgent;
@@ -87,14 +85,5 @@ namespace Company.Function
             var organizationUrl = new Uri(new Uri(AdoBaseUrl), AdoOrgName);
             return new VssConnection(organizationUrl, credentials, settings);
         }
-
-        private static async Task<string> GetManagedIdentityAccessToken()
-        {
-            var tokenRequestContext = new TokenRequestContext(VssAadSettings.DefaultScopes);
-            var token = await credential.GetTokenAsync(tokenRequestContext, CancellationToken.None);
-
-            return token.Token;
-        }
-
     }
 }
