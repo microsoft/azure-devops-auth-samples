@@ -18,5 +18,5 @@ For more information about Azure DevOps:
 For more information about Azure AD Service Principals:
 
 - Azure AD Applications - [Application and service principal objects in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)
-- Azure AD Managed Identitis - [What are managed identities for Azure resources?](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview)
+- Azure AD Managed Identities - [What are managed identities for Azure resources?](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview)
 - Authentication protocol - [Microsoft identity platform and the OAuth 2.0 client credentials flow](https://learn.microsoft.com/en-gb/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow)
