@@ -110,6 +110,7 @@ Run app.py from shell or command line. Note that the host and port values need t
 ```Shell
 $ flask run --host localhost --port 5000
 ```
+**Important**:In latest macOS(15.x), 5000/tcp already used with macOS.
 
 or 
 
