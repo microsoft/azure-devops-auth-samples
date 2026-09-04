@@ -4,11 +4,11 @@ For windows native applications which want to target both Azure DevOps and TFS w
 
 ## Sample Application
 
-This buildable sample will walk you through the steps to create a client-side console application which uses Client Libraries - Interactive and Windows Auth to authenticate a Azure DevOps or TFS user and return a list of all projects inside a selected Azure DevOps account or TFS collection.
+This buildable sample will walk you through the steps to create a client-side console application which uses Client Libraries - Interactive and Windows Auth to authenticate an Azure DevOps or TFS user and return a list of all projects inside a selected Azure DevOps account or TFS collection.
 
 To run this sample you will need:
 * [Visual Studio IDE](https://www.visualstudio.com/vs/)
-* A [Azure DevOps organization](https://dev.azure.com/)
+* An [Azure DevOps organization](https://dev.azure.com/)
 
 ## Step 1: Clone or download vsts-auth-samples repository
 
@@ -28,5 +28,5 @@ Packages: [Microsoft.VisualStudio.Services.Client](https://www.nuget.org/package
 3. Use [Nuget package restore](https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore) to ensure you have all dependencies installed.
 4. Open CS file `Program.cs` and there is a section with input values to change at the top of the class:
     * `azureDevOpsOrganizationUrl` - update this with the url to your Azure DevOps/TFS collection, e.g. http://dev.azure.com/organization for Azure DevOps or http://myserver:8080/tfs/DefaultCollection for TFS.
-5. Build and run the solution. After running you should see an interactive login prompt if you are a Azure DevOps user. If you are a TFS user authentication should happen in the background. After authentication and authorization, a list of all projects inside of your account will be displayed in the console.
+5. Build and run the solution. After running you should see an interactive login prompt if you are an Azure DevOps user. If you are a TFS user authentication should happen in the background. After authentication and authorization, a list of all projects inside of your account will be displayed in the console.
 
